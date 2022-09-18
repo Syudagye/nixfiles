@@ -9,8 +9,6 @@
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
-    # leftwm.url = "path:leftwm";
-    # leftwm.url = "path:leftwm-fix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -41,22 +39,10 @@
       };
     in
     {
-      # nixosConfigurations.fancy-toaster = nixpkgs.lib.nixosSystem {
-      #   inherit system;
-      #   modules = [ ./hosts/fancy-toaster/configuration.nix ];
-      #   specialArgs = inputs;
-      # };
       nixosConfigurations = {
         fancy-toaster = mkSys "fancy-toaster";
       };
 
-      # homeConfigurations.syu = home-manager.lib.homeManagerConfiguration {
-      #   inherit pkgs;
-      #   modules = [
-      #     ./home.nix
-      #   ];
-      #   extraSpecialArgs = inputs;
-      # };
       homeConfigurations = {
         fancy-toaster = mkUser "fancy-toaster";
       };
