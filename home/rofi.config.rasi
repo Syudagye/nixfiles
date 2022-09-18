@@ -1,0 +1,93 @@
+configuration {
+	modi: "drun,run,ssh,window";
+	show-icons: true;
+	terminal: "alacritty";
+	scroll-method: 1;
+	sidebar-mode: true;
+}
+
+* {
+	font: "iosevka 10";
+    background-color: #2e2e38;
+    text-color: #c7c7d1;
+
+    bg-color: #2e2e38;
+    box-color: #5c5c70;
+    fg-color: #c7c7d1;
+    accent-color: #ffa666;
+}
+
+window {
+	width: 100%;
+	padding: 0;
+	anchor: north;
+    location: north;
+    /* border-color: rgba(199, 199, 209, 1.0); */
+}
+
+mainbox {
+    children: [ inputbar, message, listview ];
+}
+
+inputbar {
+    padding: 4px;
+    /* orientation: horizontal; */
+    /* max-height: 32px; */
+    children: [ prompt, entry, mode-switcher ];
+}
+prompt {
+    padding: 3px 6px;
+    border-radius: 6px;
+    background-color: @box-color;
+    color: #ffffff;
+}
+entry {
+    color: @fg-color;
+    padding: 3px 6px;
+}
+mode-switcher {
+    padding: 3px 6px;
+    border-radius: 6px;
+    background-color: @box-color;
+}
+button {
+    padding: 0 3px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: @box-color;
+}
+button.selected.normal {
+    color: @box-color;
+    background-color: @accent-color;
+}
+listview {
+    dynamic: true;
+    require-input: true;
+    fixed-height: false;
+    scrollbar: false;
+    lines: 16;
+    border-color: @bg-color;
+    margin: 6px;
+    spacing: 3px;
+}
+element {
+    padding: 3px 6px;
+    border-radius: 6px;
+}
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element.normal.normal, element.alternate.normal {
+    background-color: @bg-color;
+    text-color:       #ffffff;
+}
+element.normal.active, element.alternate.active {
+    background-color: @box-color;
+    text-color:       #ffffff;
+}
+element.selected.normal, element.selected.active {
+    background-color: @accent-color;
+    text-color:       @box-color;
+}
+/* vim:ft=css

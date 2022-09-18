@@ -1,0 +1,27 @@
+#!/bin/sh
+export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# Down the last running theme
+if [ -f "/tmp/leftwm-theme-down" ]; then
+    /tmp/leftwm-theme-down
+    rm /tmp/leftwm-theme-down
+fi
+ln -sf $SCRIPTPATH/down /tmp/leftwm-theme-down
+
+# Boot picom
+if [ -x "$(command -v picom)" ]; then
+    picom --daemon --experimental-backends &> /dev/null
+fi
+
+# Set the theme.toml config
+leftwm-command "LoadTheme $SCRIPTPATH/theme.toml"
+
+# Set background
+if [ -x "$(command -v feh)" ]; then
+    feh --bg-fill --no-fehbg $SCRIPTPATH/background.jpg
+fi
+
+# EWW
+eww daemon
+eww open bar -c $SCRIPTPATH/eww
+eww update user=$(whoami) -c $SCRIPTPATH/eww
