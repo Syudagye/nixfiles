@@ -56,7 +56,7 @@
   # USERS
   users.users.syu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "dialout" ];
   };
 
   # List packages installed in system profile. To search, run:
