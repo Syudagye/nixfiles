@@ -1,4 +1,4 @@
-{ config, pkgs, nix-gaming, leftwm, ... }:
+{ config, pkgs, nix-gaming, leftwm, lefthk, ... }:
 
 {
   # nixpkgs.config.allowUnfree = true;
@@ -9,6 +9,7 @@
     packages = with pkgs; [
       ### Drivers / Utilities
       leftwm.packages.${pkgs.system}.leftwm
+      lefthk.packages.${pkgs.system}.lefthk
       rofi
       xclip
       maim
@@ -18,7 +19,6 @@
       pavucontrol
       lxde.lxsession
       xdotool
-      dunst
       feh
       gnupg
       uwufetch
@@ -51,6 +51,9 @@
 
       ### Custom scripts
       (writeShellScriptBin "tablet-config" (builtins.readFile ../../home/bin/tablet-config))
+      (writeShellScriptBin "volume" (builtins.readFile ../../home/bin/volume))
+      (writeShellScriptBin "brightness" (builtins.readFile ../../home/bin/brightness))
+      bc # for calculating brightness
     ];
 
     shellAliases = {
@@ -63,6 +66,8 @@
     file.".config/leftwm/config.ron".source = ../../home/leftwm/config.ron;
     file.".config/leftwm/themes/current".source = ../../home/leftwm/themes/fancy-toaster;
     file.".config/rofi/config.rasi".source = ../../home/rofi.config.rasi;
+    file.".config/lefthk/config.ron".source = ../../home/lefthk.ron;
+    file.".xprofile".source = ../../home/.xprofile;
   };
 
   programs = {
@@ -146,6 +151,7 @@
 
   services = {
     udiskie.enable = true;
+
     dunst = {
       enable = true;
       settings = {
@@ -194,11 +200,12 @@
     platformTheme = "gtk";
   };
 
-  # xsession = {
-  #   enable = true;
-  #   numlock.enable = true;
-  #   windowManager.command = "${leftwm.packages.${pkgs.system}.leftwm}/bin/leftwm";
-  # };
+  xsession = {
+    profileExtra = ''
+      lefthk &
+    '';
+    numlock.enable = true;
+  };
 
   xdg = {
     enable = true;
@@ -218,13 +225,13 @@
       enable = true;
       createDirectories = true;
       desktop = "$HOME";
-      documents = "$HOME/documents";
-      download = "$HOME/downloads";
-      music = "$HOME/music";
-      pictures = "$HOME/images";
+      documents = "$HOME/Documents";
+      download = "$HOME/Downloads";
+      music = "$HOME/Music";
+      pictures = "$HOME/Images";
       publicShare = "$HOME";
       templates = "$HOME";
-      videos = "$HOME/videos";
+      videos = "$HOME/Videos";
     };
   };
 }

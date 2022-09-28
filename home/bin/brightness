@@ -1,0 +1,16 @@
+#!/bin/bash
+
+MAX=$(brightnessctl m)
+CURR=$(brightnessctl g)
+
+if [ $CURR -gt $MAX ]; then
+    brightnessctl s $MAX
+else
+    brightness=$(($CURR + $1))
+    brightnessctl s $brightness
+fi
+
+b=$(bc -l <<< "scale = 0; $(bc -l <<< "scale = 2; $(brightnessctl g) / $(brightnessctl m)") * 100")
+b=${b:0:-3}
+msg="Brightness: $b%"
+dunstify -a "changeBrightness" -u low -h int:value:"$b" -r "69420" "$msg"

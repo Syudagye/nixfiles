@@ -9,6 +9,7 @@
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
+    lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
