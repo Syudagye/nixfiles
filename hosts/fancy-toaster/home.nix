@@ -21,7 +21,7 @@
       xdotool
       feh
       gnupg
-      uwufetch
+      # uwufetch
       neofetch
       xf86_input_wacom
       xorg.xkill
@@ -39,6 +39,7 @@
       neovide
       rnix-lsp
       rustup
+      php
 
       ### Gaming
       steam
@@ -68,6 +69,14 @@
     file.".config/rofi/config.rasi".source = ../../home/rofi.config.rasi;
     file.".config/lefthk/config.ron".source = ../../home/lefthk.ron;
     file.".xprofile".source = ../../home/.xprofile;
+
+    # Marche po :c
+    # pointerCursor = {
+    #   name = "breeze_cursors";
+    #   package = pkgs.libsForQt5.breeze-gtk;
+    #   gtk.enable = true;
+    #   x11.enable = true;
+    # };
   };
 
   programs = {

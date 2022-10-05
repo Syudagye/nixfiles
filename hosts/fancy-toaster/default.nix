@@ -174,6 +174,12 @@
     # for thunar
     gvfs.enable = true;
     tumbler.enable = true;
+
+    # setup for mysql
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
   };
   # Enable sound.
   sound.enable = true;
