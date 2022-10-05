@@ -45,8 +45,7 @@
 (defwidget title []
   (label :class "title"
          :hexpand true
-         :limit-width 50
-         :wrap true
+         :limit-width 140
          :text {window-title}))
 
 ;; Right modules
@@ -54,7 +53,7 @@
 (defwidget right []
   (box :class "right" :halign "end" :space-evenly false :spacing 12
     (system-infos)
-    (system-menu)
+    ;;(system-menu)
     (time)))
 
 (defwidget system-infos []
