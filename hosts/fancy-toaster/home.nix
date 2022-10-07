@@ -33,6 +33,7 @@
       nix-gaming.packages.${pkgs.system}.osu-stable
       nix-gaming.packages.${pkgs.system}.wine-discord-ipc-bridge
       gparted
+      wireshark
 
       ### Dev
       neovim
@@ -40,6 +41,8 @@
       rnix-lsp
       rustup
       php
+      android-studio
+      dart
 
       ### Gaming
       steam

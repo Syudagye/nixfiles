@@ -56,7 +56,7 @@
   # USERS
   users.users.syu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "dialout" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "dialout" "wireshark" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -68,6 +68,8 @@
     dosfstools
     w3m
     git
+    cmake
+    pkg-config
   ];
   programs = {
     gnupg.agent = {
