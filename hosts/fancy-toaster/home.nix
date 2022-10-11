@@ -33,7 +33,6 @@
       nix-gaming.packages.${pkgs.system}.osu-stable
       nix-gaming.packages.${pkgs.system}.wine-discord-ipc-bridge
       gparted
-      wireshark
 
       ### Dev
       neovim

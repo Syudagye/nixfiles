@@ -8,6 +8,10 @@
       trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
       experimental-features = [ "nix-command" "flakes" ];
     };
+    gc = {
+      dates = "weekly";
+      automatic = true;
+    };
   };
 
   # BOOTLOADER
@@ -84,6 +88,10 @@
         thunar-archive-plugin
         thunar-media-tags-plugin
       ];
+    };
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
     };
   };
 
