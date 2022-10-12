@@ -42,6 +42,8 @@
       php
       android-studio
       dart
+      nodejs
+      mono
 
       ### Gaming
       steam
