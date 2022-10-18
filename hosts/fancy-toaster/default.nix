@@ -48,6 +48,7 @@
   networking = {
     hostName = "fancy-toaster";
     networkmanager.enable = true;
+    firewall.allowPing = true;
   };
 
   # TIMEZONE
@@ -222,6 +223,8 @@
     polkit.enable = true;
     rtkit.enable = true;
   };
+
+  virtualisation.virtualbox.host.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
