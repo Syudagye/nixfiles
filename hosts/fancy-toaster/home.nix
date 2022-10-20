@@ -172,6 +172,8 @@
           offset = "6x40";
           frame_width = 2;
           separator_color = "frame";
+          highlight = "#ffa666";
+          progress_bar_frame_width = 0;
         };
         urgency_low = {
           background = "#2e2e38";
