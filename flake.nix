@@ -30,9 +30,7 @@
             ./hosts/fancy-toaster
           ];
         };
-      };
 
-      hosts = {
         free-real-estate = {
           system = "aarch64-linux";
           specialArgs = inputs;
