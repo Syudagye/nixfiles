@@ -31,5 +31,17 @@
           ];
         };
       };
+
+      hosts = {
+        free-real-estate = {
+          system = "aarch64-linux";
+          specialArgs = inputs;
+          modules = [
+            /etc/nixos/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            ./hosts/fancy-toaster
+          ];
+        };
+      };
     };
 }
