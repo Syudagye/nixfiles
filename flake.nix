@@ -10,42 +10,26 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
     lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
+    flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
+    flake-utils.lib.mkFlake {
+      inherit self inputs;
 
-      mkUser = host: home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = inputs;
-        modules = [
-          ./hosts/${host}/home.nix
-        ];
-      };
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      channelsConfig.allowUnfree = true;
 
-      mkSys = host: nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        specialArgs = inputs;
-        modules = [
-          # Import system generated configuration
-          # impure, but leave the file untouched
-          /etc/nixos/hardware-configuration.nix
-          ./hosts/${host}
-        ];
-      };
-    in
-    {
-      nixosConfigurations = {
-        fancy-toaster = mkSys "fancy-toaster";
-      };
-
-      homeConfigurations = {
-        fancy-toaster = mkUser "fancy-toaster";
+      hosts = {
+        fancy-toaster = {
+          system = "x86_64-linux";
+          specialArgs = inputs;
+          modules = [
+            /etc/nixos/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            ./hosts/fancy-toaster
+          ];
+        };
       };
     };
 }

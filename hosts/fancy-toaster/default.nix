@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... } @ inputs:
 
 {
+  home-manager.users.syu = (import ./home.nix) inputs;
+
   nix = {
     package = pkgs.nixVersions.stable;
     settings = {
