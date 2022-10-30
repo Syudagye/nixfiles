@@ -24,6 +24,8 @@
       hostDefaults.modules = [
         ./modules/boot.nix
 
+        ./config/common.nix
+
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -39,9 +41,6 @@
           specialArgs = inputs;
           modules = [
             /etc/nixos/hardware-configuration.nix
-            home-manager.nixosModules.home-manager
-            { }
-            ./modules/boot.nix
             ./hosts/fancy-toaster
           ];
         };
@@ -52,8 +51,6 @@
           specialArgs = inputs;
           modules = [
             /etc/nixos/hardware-configuration.nix
-            home-manager.nixosModules.home-manager
-            ./modules/boot.nix
             ./hosts/free-real-estate
           ];
         };

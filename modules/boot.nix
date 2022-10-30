@@ -1,10 +1,4 @@
 # Boot configuration, UEFI only for now
-# { graphical ? true
-# , efiSysMountPoint ? "/efi"
-# , pkgs
-# , lib
-# , ...
-# }:
 { lib, pkgs, config, ... }:
 
 with lib;
