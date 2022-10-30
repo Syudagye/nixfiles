@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,31 +14,47 @@
     flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, flake-utils, ... } @ inputs:
     flake-utils.lib.mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       channelsConfig.allowUnfree = true;
 
+      hostDefaults.modules = [
+        ./modules/boot.nix
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          # home-manager.users.jdoe = import ./home.nix;
+        }
+      ];
+
       hosts = {
         fancy-toaster = {
           system = "x86_64-linux";
+          channelName = "nixpkgs";
           specialArgs = inputs;
           modules = [
             /etc/nixos/hardware-configuration.nix
             home-manager.nixosModules.home-manager
+            { }
+            ./modules/boot.nix
             ./hosts/fancy-toaster
           ];
         };
 
         free-real-estate = {
           system = "aarch64-linux";
+          channelName = "nixpkgs-stable";
           specialArgs = inputs;
           modules = [
             /etc/nixos/hardware-configuration.nix
             home-manager.nixosModules.home-manager
-            ./hosts/fancy-toaster
+            ./modules/boot.nix
+            ./hosts/free-real-estate
           ];
         };
       };

@@ -16,34 +16,11 @@
     };
   };
 
-  # BOOTLOADER
-  boot = {
+  # custom modules
+  syu.boot = {
+    graphical = true;
     kernelParams = [ "atkbd.reset" ];
     extraModprobeConfig = "options tuxedo_keyboard color_left=0x00ffff brightness=100";
-    loader = {
-      grub = {
-        enable = true;
-        efiSupport = true;
-        useOSProber = true;
-        device = "nodev";
-        theme = "/home/syu/CyberRe 1.0.0/CyberRe/";
-        extraEntries =
-          ''
-            menuentry 'UEFI Firmware Settings' --id 'uefi-firmware' {
-            	fwsetup
-            }
-
-            menuentry "System shutdown" {
-            	echo "System shutting down..."
-            	halt
-            }
-          '';
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
-      };
-    };
   };
 
   # NETWORKING

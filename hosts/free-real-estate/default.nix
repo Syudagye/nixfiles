@@ -14,21 +14,6 @@
     };
   };
 
-  # BOOTLOADER
-  boot = {
-    loader = {
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
-      };
-    };
-  };
-
   # NETWORKING
   networking = {
     hostName = "free-real-estate";
