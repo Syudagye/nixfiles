@@ -8,13 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-22.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
     lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
     flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, flake-utils, ... } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, home-manager-stable, flake-utils, ... } @ inputs:
     flake-utils.lib.mkFlake {
       inherit self inputs;
 
@@ -26,7 +30,6 @@
 
         ./config/common.nix
 
-        home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -40,6 +43,7 @@
           channelName = "nixpkgs";
           specialArgs = inputs;
           modules = [
+            home-manager.nixosModules.home-manager
             /etc/nixos/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
@@ -50,6 +54,7 @@
           channelName = "nixpkgs-stable";
           specialArgs = inputs;
           modules = [
+            home-manager-stable.nixosModules.home-manager
             /etc/nixos/hardware-configuration.nix
             ./hosts/free-real-estate
           ];

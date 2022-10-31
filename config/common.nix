@@ -45,5 +45,6 @@
     zip
     unzip
     htop
+    neofetch
   ];
 }

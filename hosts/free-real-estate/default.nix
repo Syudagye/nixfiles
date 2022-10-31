@@ -4,7 +4,7 @@
   home-manager.users.syu = (import ./home.nix) inputs;
 
   # NETWORKING
-  networkinghostName = "free-real-estate";
+  networking.hostName = "free-real-estate";
 
   programs.gnupg.agent = {
     enable = true;
