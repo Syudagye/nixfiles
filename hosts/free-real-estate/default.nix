@@ -25,49 +25,84 @@
   };
 
   # CONTAINERS
-  containers = let
-    mkMCContainer = folder: mcPort: rconPort: {
-      autoStart = true;
-      bindMounts = {
-        "/minecraft" = {
-          hostPath = "/home/syu/${folder}";
-          isReadOnly = false;
+  containers =
+    let
+      mkMCContainer = folder: mcPort: rconPort: {
+        autoStart = true;
+        bindMounts = {
+          "/minecraft" = {
+            hostPath = "/home/syu/${folder}";
+            isReadOnly = false;
+          };
+        };
+        forwardPorts = [
+          {
+            containerPort = 25565;
+            hostPort = mcPort;
+          }
+          {
+            containerPort = 25575;
+            hostPort = rconPort;
+          }
+        ];
+        extraFlags = [ "-U" ];
+
+        config = { config, pkgs, ... }: {
+          networking = {
+            firewall.allowedTCPPorts = [
+              25565
+              25575
+            ];
+          };
+
+          services.minecraft-server = {
+            enable = true;
+            package = pkgs.papermc;
+            eula = true;
+            dataDir = "/minecraft";
+          };
+
+          system.stateVersion = "22.05";
         };
       };
-      forwardPorts = [
-        {
-          containerPort = 25565;
-          hostPort = mcPort;
-        }
-        {
-          containerPort = 25575;
-          hostPort = rconPort;
-        }
-      ];
-      extraFlags = [ "-U" ];
-
-      config = { config, pkgs, ... }: {
-        networking = {
-          firewall.allowedTCPPorts = [
-            25565
-            25575
-          ];
+    in
+    {
+      bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
+      crea = mkMCContainer "crea" 25566 25576;
+      redbot = {
+        autoStart = true;
+        config = { config, pkgs, ... }: {
+          system.stateVersion = "22.05";
+          users.users.redbot = {
+            isNormalUser = true;
+            extraGroups = [ "wheel" ];
+          };
+          # SYSTEM PACKAGES
+          environment = {
+            systemPackages = with pkgs; [
+              neovim
+              (pkgs.python39.withPackages (p: [ p.pip ]))
+              jdk11_headless
+              gcc
+              gnumake
+              screen
+              (pkgs.writeShellScriptBin "setup-bot" ''
+                python3.9 -m venv ~/
+                source ~/bin/activate
+                python -m pip install -U pip setuptools wheel
+                python -m pip install -U Red-DiscordBot
+                redbot-setup --instance-name "$REDBOT_INSTANCE_NAME"
+              '')
+              (pkgs.writeShellScriptBin "start-bot" ''
+                source ~/bin/activate
+                redbot "$REDBOT_INSTANCE_NAME"
+              '')
+            ];
+            variables.REDBOT_INSTANCE_NAME = "muzik_trouville";
+          };
         };
-
-        services.minecraft-server = {
-          enable = true;
-          package = pkgs.papermc;
-          eula = true;
-          dataDir = "/minecraft";
-        };
-
-        system.stateVersion = "22.05";
       };
-      };
-  in {
-    bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
-    crea = mkMCContainer "crea" 25566 25576;
-  };
+    };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
