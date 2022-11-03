@@ -51,6 +51,7 @@ in
           enable = true;
           efiSupport = true;
           device = "nodev";
+          useOSProber = cfg.graphical;
           theme = mkIf cfg.graphical theme;
           extraEntries = mkIf cfg.graphical extraEntries;
         };

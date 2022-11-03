@@ -41,6 +41,7 @@
       rustup
       php
       android-studio
+      jdk
       dart
       nodejs
       mono

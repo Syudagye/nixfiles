@@ -38,7 +38,8 @@
           system = "x86_64-linux";
           specialArgs = inputs;
           modules = [
-            /etc/nixos/hardware-configuration.nix
+            # /etc/nixos/hardware-configuration.nix
+            ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
         };
