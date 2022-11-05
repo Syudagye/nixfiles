@@ -1,4 +1,4 @@
-{ config, pkgs, ... } @ inputs:
+{ config, pkgs, nixpkgs-unstable, ... } @ inputs:
 
 {
   home-manager.users.syu = (import ./home.nix) inputs;
@@ -46,6 +46,7 @@
           }
         ];
         extraFlags = [ "-U" ];
+        nixpkgs = nixpkgs-unstable;
 
         config = { config, pkgs, ... }: {
           networking = {

@@ -3,9 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-stable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
@@ -13,32 +18,32 @@
     flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, ... } @ inputs:
     flake-utils.lib.mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       channelsConfig.allowUnfree = true;
 
-      hostDefaults.modules = [
-        ./modules/boot.nix
+      hostDefaults = {
+        modules = [
+          ./modules/boot.nix
 
-        ./config/common.nix
+          ./config/common.nix
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          # home-manager.users.jdoe = import ./home.nix;
-        }
-      ];
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+        extraArgs = { inherit inputs; };
+      };
 
       hosts = {
         fancy-toaster = {
           system = "x86_64-linux";
-          specialArgs = inputs;
           modules = [
-            # /etc/nixos/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
             ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
@@ -46,8 +51,10 @@
 
         free-real-estate = {
           system = "aarch64-linux";
-          specialArgs = inputs;
+          channelName = "nixpkgs-stable";
+          extraArgs = { nixpkgs-unstable = nixpkgs; };
           modules = [
+            home-manager-stable.nixosModules.home-manager
             /etc/nixos/hardware-configuration.nix
             ./hosts/free-real-estate
           ];
