@@ -66,6 +66,7 @@
           system.stateVersion = "22.05";
         };
       };
+      redbotInstance = "muzik_trouville";
     in
     {
       bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
@@ -92,14 +93,27 @@
                 source ~/bin/activate
                 python -m pip install -U pip setuptools wheel
                 python -m pip install -U Red-DiscordBot
-                redbot-setup --instance-name "$REDBOT_INSTANCE_NAME"
+                redbot-setup --instance-name "${redbotInstance}"
               '')
               (pkgs.writeShellScriptBin "start-bot" ''
                 source ~/bin/activate
-                redbot "$REDBOT_INSTANCE_NAME"
+                redbot "${redbotInstance}" --no-prompt
               '')
             ];
             variables.REDBOT_INSTANCE_NAME = "muzik_trouville";
+          };
+          # Redbot service
+          systemd.services.redbot = {
+            description = "Redbot service";
+            after = [ "multi-user.target" "network-online.target" ];
+            wants = [ "network-online.target" ];
+            wantedBy = [ "multi-user.target" ];
+            path = [ pkgs.jdk11_headless ];
+            serviceConfig = {
+              ExecStart = "/home/redbot/bin/python -O -m redbot ${redbotInstance} --no-prompt";
+              Type = "idle";
+              User = "redbot";
+            };
           };
         };
       };
