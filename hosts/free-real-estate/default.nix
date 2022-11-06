@@ -94,10 +94,7 @@
                 python -m pip install -U pip setuptools wheel
                 python -m pip install -U Red-DiscordBot
                 redbot-setup --instance-name "${redbotInstance}"
-              '')
-              (pkgs.writeShellScriptBin "start-bot" ''
-                source ~/bin/activate
-                redbot "${redbotInstance}" --no-prompt
+                redbot "${redbotInstance}"
               '')
             ];
             variables.REDBOT_INSTANCE_NAME = "muzik_trouville";
@@ -105,8 +102,7 @@
           # Redbot service
           systemd.services.redbot = {
             description = "Redbot service";
-            after = [ "multi-user.target" "network-online.target" ];
-            wants = [ "network-online.target" ];
+            after = [ "network.target" ];
             wantedBy = [ "multi-user.target" ];
             path = [ pkgs.jdk11_headless ];
             serviceConfig = {
