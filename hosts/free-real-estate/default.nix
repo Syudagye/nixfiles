@@ -70,7 +70,7 @@
     in
     {
       bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
-      crea = mkMCContainer "crea" 25566 25576;
+      crea = mkMCContainer "crea" 25564 25574;
       redbot = {
         autoStart = true;
         config = { config, pkgs, ... }: {
