@@ -18,7 +18,7 @@
     flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
   };
 
-  outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
     flake-utils.lib.mkFlake {
       inherit self inputs;
 
@@ -36,7 +36,7 @@
             home-manager.useUserPackages = true;
           }
         ];
-        extraArgs = { inherit inputs; };
+        extraArgs = inputs;
       };
 
       hosts = {

@@ -1,4 +1,4 @@
-{ config, pkgs, ... } @ inputs:
+{ config, pkgs, nix-gaming, leftwm, lefthk, ... } @ inputs:
 
 {
   home-manager.users.syu = (import ./home.nix) inputs;
@@ -18,6 +18,7 @@
   };
 
   networking.hostName = "fancy-toaster";
+  networking.firewall.allowedTCPPorts = [ 3334 3333 4444 ];
 
   programs = {
     gnupg.agent = {
