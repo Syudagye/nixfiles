@@ -19,7 +19,19 @@
   };
 
   outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
-    flake-utils.lib.mkFlake {
+    let
+      pkgs = self.pkgs.x86_64-linux.nixpkgs;
+      clickgen = import ./pkgs/clickgen.nix {
+        inherit (pkgs) lib stdenv fetchFromGitHub libpng;
+        inherit (pkgs.python3Packages) buildPythonPackage pythonOlder pytestCheckHook pillow python toml numpy attrs;
+        inherit (pkgs.xorg) libXcursor libX11;
+      };
+      breezex-cursor = import ./pkgs/breezex-cursor {
+        inherit clickgen;
+        inherit (pkgs) lib stdenv fetchFromGitHub mkYarnPackage;
+      };
+    in
+    flake-utils.lib.mkFlake rec {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
@@ -66,7 +78,11 @@
         modules = [
           ./hosts/archbtw/home.nix
         ];
-        extraSpecialArgs = inputs;
+        extraSpecialArgs = inputs // { inherit breezex-cursor; };
+      };
+
+      outputBuilder = channels: {
+        packages = rec { };
       };
     };
 }
