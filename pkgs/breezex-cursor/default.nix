@@ -17,8 +17,7 @@ let
 in
 
 mkYarnPackage rec {
-  name = pname;
-  inherit src;
+  inherit src pname version;
   packageJSON = ./package.json;
   yarnLock = ./yarn.lock;
   doDist = false;
