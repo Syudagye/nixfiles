@@ -75,13 +75,6 @@
     file.".config/lefthk/config.ron".source = ../../home/lefthk.ron;
     file.".xprofile".source = ../../home/.xprofile;
 
-    # Marche po :c
-    # pointerCursor = {
-    #   name = "breeze_cursors";
-    #   package = pkgs.libsForQt5.breeze-gtk;
-    #   gtk.enable = true;
-    #   x11.enable = true;
-    # };
   };
 
   programs = {
@@ -193,27 +186,6 @@
         };
       };
     };
-  };
-
-  gtk = {
-    enable = true;
-    # cursorTheme.package = pkgs.libsForQt5.breeze-gtk;
-    theme = {
-      name = "Matcha-dark-sea";
-      package = pkgs.matcha-gtk-theme;
-    };
-    cursorTheme = {
-      name = "Breeze";
-      package = pkgs.libsForQt5.breeze-gtk;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-  };
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
   };
 
   xsession = {
