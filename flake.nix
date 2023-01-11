@@ -49,6 +49,7 @@
           ./modules/boot.nix
 
           ./config/common.nix
+          ./hosts/common/home.nix
 
           {
             home-manager.useGlobalPkgs = true;
@@ -65,6 +66,8 @@
           modules = [
             home-manager.nixosModules.home-manager
             ./config/theming.nix
+            ./config/home-services.nix
+            ./hosts/common/home-desktop.nix
             ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
@@ -86,13 +89,11 @@
         pkgs = import nixpkgs { inherit overlays; system = "x86_64-linux"; };
         modules = [
           ./config/theming.nix
+          ./hosts/common/home.nix
+          ./hosts/common/home-desktop.nix
           ./hosts/archbtw/home.nix
         ];
         extraSpecialArgs = inputs // { inherit breezex-cursor; };
-      };
-
-      outputBuilder = channels: {
-        packages = rec { };
       };
     };
 }
