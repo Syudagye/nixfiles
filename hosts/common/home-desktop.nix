@@ -23,19 +23,9 @@
     #   };
     # };
 
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-      defaultKeymap = "vicmd";
-      initExtra = ''
-        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-        clear
-      '';
-      shellAliases = {
-        ls = "exa -l --git --icons";
-        la = "ls -a";
-      };
+    zsh.shellAliases = {
+      ls = "exa -l --git --icons";
+      la = "ls -a";
     };
     starship = {
       enable = true;
