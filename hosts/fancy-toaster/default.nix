@@ -1,6 +1,10 @@
 { config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... } @ inputs:
 
 {
+  imports = [
+    ../../modules
+  ];
+
   home-manager.users.syu =  (import ./home.nix) inputs;
 
   nix = {

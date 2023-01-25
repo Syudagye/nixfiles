@@ -4,7 +4,18 @@ let
   alacritty = (pkgs.formats.yaml { }).generate "alacritty.yml" (import ../../config/alacritty.nix { });
 in
 {
-  # nixpkgs.config.allowUnfree = true;
+  imports = [
+    ../../modules/home
+  ];
+
+  syu = {
+    theming.enable = true;
+    shell = {
+      enable = true;
+      enableStarship = true;
+    };
+  };
+
   home = {
     file.".config/alacritty/alacritty.yml".source = alacritty;
   };

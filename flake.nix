@@ -48,8 +48,6 @@
 
       hostDefaults = {
         modules = [
-          ./modules/boot.nix
-
           ./config/common.nix
 
           {
@@ -86,7 +84,6 @@
       homeConfigurations.archbtw = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit overlays; system = "x86_64-linux"; };
         modules = [
-          ./config/theming.nix
           ./hosts/common/home.nix
           ./hosts/common/home-desktop.nix
           ./hosts/archbtw/home.nix

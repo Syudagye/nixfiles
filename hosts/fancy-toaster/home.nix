@@ -2,9 +2,17 @@
 
 {
   imports = [
-    ../../modules/theming.nix
+    ../../modules/home
   ];
-  syu.theming.enable = true;
+
+  syu = {
+    theming.enable = true;
+    shell = {
+      enable = true;
+      enableStarship = true;
+    };
+  };
+
   # nixpkgs.config.allowUnfree = true;
   home = {
     username = "syu";
@@ -19,7 +27,6 @@
       rofi
       xclip
       maim
-      exa
       # eww
       eww-systray.packages.${pkgs.system}.eww
       wmctrl
@@ -71,53 +78,6 @@
     file.".config/lefthk/config.ron".source = ../../home/lefthk.ron;
   };
 
-  programs = {
-    # TODO: Improve browser related config
-    # librewolf = {
-    #   enable = true;
-    #   settings = {
-    #     "webgl.disabled" = false;
-    #   };
-    # };
-
-    starship = {
-      enable = true;
-      settings = {
-        format = lib.concatStrings [
-          "$git_state"
-          "$git_branch"
-          "$git_status"
-          "$package"
-          "$rust"
-          "$nodejs"
-          "\n"
-          "$directory(blue)"
-          "$character"
-        ];
-        right_format = lib.concatStrings [ "$status" "$cmd_duration" "$jobs" ];
-        character = {
-          success_symbol = "[➜](green bold)";
-          error_symbol = "[➜](red bold)";
-          vicmd_symbol = "[V](green bold)";
-        };
-
-        git_branch.format = "[$symbol$branch](green)";
-        git_status.format = " ([\\[$all_status$ahead_behind\\]](bold green))";
-
-        package.format = " \\[[$version]($style)\\]";
-        rust.format = " \\(rust [$version]($style)\\)";
-        nodejs.format = " \\(node [$version]($style)\\)";
-
-        status = {
-          format = "[$status]($style)( \\([$common_meaning]($style)\\))";
-          disabled = false;
-        };
-        cmd_duration.format = " \\[took [$duration]($style)\\]";
-        jobs .format = " [$symbol$number]($style)";
-      };
-    };
-  };
-
   services = {
     udiskie.enable = true;
 
@@ -167,21 +127,6 @@
   };
   programs = {
     home-manager.enable = true;
-
-
-    zsh = {
-      shellAliases = {
-        ls = "exa -l --git --icons";
-        la = "ls -a";
-      };
-      enable = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-      defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
-      initExtra = ''
-        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      '';
-    };
   };
   programs = {
     git = {

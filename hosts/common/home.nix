@@ -30,16 +30,5 @@
         preview = true;
       };
     };
-
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-      defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
-      initExtra = ''
-        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-      '';
-    };
   };
 }
-
