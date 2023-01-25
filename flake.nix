@@ -20,24 +20,45 @@
   };
 
   outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
-    flake-utils.lib.mkFlake {
+    let
+      pkgs = self.pkgs.x86_64-linux.nixpkgs;
+      clickgen = pkgs.callPackage ./pkgs/clickgen.nix {
+        inherit (pkgs.python3Packages) buildPythonPackage pythonOlder pytestCheckHook pillow python toml numpy attrs;
+        inherit (pkgs.xorg) libXcursor libX11;
+      };
+      breezex-cursor = pkgs.callPackage ./pkgs/breezex-cursor {
+        inherit clickgen;
+      };
+      overlays = [
+        (self: super: {
+          vimix-gtk-themes = super.vimix-gtk-themes.override
+            { themeVariants = [ "amethyst" ]; sizeVariants = [ "compact" ]; };
+          vimix-icon-themes = super.vimix-icon-themes.override
+            { colorVariants = [ "Amethyst" ]; };
+        })
+      ];
+    in
+    flake-utils.lib.mkFlake rec {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       channelsConfig.allowUnfree = true;
+      sharedOverlays = overlays;
 
       hostDefaults = {
         modules = [
           ./modules/boot.nix
 
           ./config/common.nix
+          ./hosts/common/home.nix
 
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            nixpkgs.overlays = overlays;
           }
         ];
-        extraArgs = inputs;
+        extraArgs = inputs // { inherit breezex-cursor; };
       };
 
       hosts = {
@@ -45,6 +66,9 @@
           system = "x86_64-linux";
           modules = [
             home-manager.nixosModules.home-manager
+            ./config/theming.nix
+            ./config/home-services.nix
+            ./hosts/common/home-desktop.nix
             ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
@@ -60,6 +84,17 @@
             ./hosts/free-real-estate
           ];
         };
+      };
+
+      homeConfigurations.archbtw = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { inherit overlays; system = "x86_64-linux"; };
+        modules = [
+          ./config/theming.nix
+          ./hosts/common/home.nix
+          ./hosts/common/home-desktop.nix
+          ./hosts/archbtw/home.nix
+        ];
+        extraSpecialArgs = inputs // { inherit breezex-cursor; };
       };
     };
 }
