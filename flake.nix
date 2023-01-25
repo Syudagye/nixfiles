@@ -16,6 +16,7 @@
     leftwm.url = "github:Syudagye/leftwm";
     lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
     flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    eww-systray.url = github:Syudagye/eww;
   };
 
   outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:

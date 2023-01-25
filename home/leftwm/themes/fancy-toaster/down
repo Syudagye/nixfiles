@@ -10,4 +10,4 @@ fi
 leftwm-command "UnloadTheme"
 
 pkill picom
-pkill eww
+eww kill

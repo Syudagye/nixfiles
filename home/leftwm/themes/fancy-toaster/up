@@ -22,6 +22,6 @@ if [ -x "$(command -v feh)" ]; then
 fi
 
 # EWW
-eww daemon
-eww open bar -c $SCRIPTPATH/eww
-eww update user=$(whoami) -c $SCRIPTPATH/eww
+eww -c $SCRIPTPATH/eww daemon
+eww -c $SCRIPTPATH/eww open bar
+eww -c $SCRIPTPATH/eww update user=$(whoami)

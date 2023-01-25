@@ -1,4 +1,4 @@
-{ config, pkgs, nix-gaming, leftwm, lefthk, ... }:
+{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... }:
 
 {
   # nixpkgs.config.allowUnfree = true;
@@ -14,7 +14,8 @@
       xclip
       maim
       exa
-      eww
+      # eww
+      eww-systray.packages.${pkgs.system}.eww
       wmctrl
       pavucontrol
       lxde.lxsession

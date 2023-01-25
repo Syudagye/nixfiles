@@ -53,6 +53,7 @@
 (defwidget right []
   (box :class "right" :halign "end" :space-evenly false :spacing 12
     (system-infos)
+    (system-tray)
     ;;(system-menu)
     (time)))
 
