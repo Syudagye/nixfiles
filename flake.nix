@@ -50,7 +50,6 @@
           ./modules/boot.nix
 
           ./config/common.nix
-          ./hosts/common/home.nix
 
           {
             home-manager.useGlobalPkgs = true;
@@ -66,9 +65,6 @@
           system = "x86_64-linux";
           modules = [
             home-manager.nixosModules.home-manager
-            ./config/theming.nix
-            ./config/home-services.nix
-            ./hosts/common/home-desktop.nix
             ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];

@@ -29,6 +29,7 @@
   # USERS
   users.users.syu = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "video" "dialout" "wireshark" ];
   };
 
