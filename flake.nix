@@ -35,6 +35,7 @@
             { themeVariants = [ "amethyst" ]; sizeVariants = [ "compact" ]; };
           vimix-icon-themes = super.vimix-icon-themes.override
             { colorVariants = [ "Amethyst" ]; };
+          inherit breezex-cursor;
         })
       ];
     in

@@ -1,6 +1,10 @@
-{ config, pkgs, lib, nix-gaming, leftwm, lefthk, eww-systray, breezex-cursor, ... } @ inputs:
+{ config, pkgs, lib, nix-gaming, leftwm, lefthk, eww-systray, ... } @ inputs:
 
 {
+  imports = [
+    ../../modules/theming.nix
+  ];
+  syu.theming.enable = true;
   # nixpkgs.config.allowUnfree = true;
   home = {
     username = "syu";
@@ -60,7 +64,7 @@
       (writeShellScriptBin "volume" (builtins.readFile ../../home/bin/volume))
     ];
 
-    file.".xprofile".source = ../../home/.xprofile;
+    # file.".xprofile".source = ../../home/.xprofile;
     file.".config/leftwm/config.ron".source = ../../home/leftwm/config.ron;
     file.".config/leftwm/themes/current".source = ../../home/leftwm/themes/fancy-toaster;
     file.".config/rofi/config.rasi".source = ../../home/rofi.config.rasi;
@@ -217,8 +221,11 @@
   };
 
   xsession = {
+    enable = true;
     profileExtra = ''
       lefthk &
+      lxsession &
+      xrdb ~/.Xresources
     '';
     numlock.enable = true;
   };

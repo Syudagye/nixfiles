@@ -1,4 +1,4 @@
-{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, breezex-cursor, ... } @ inputs:
+{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... } @ inputs:
 
 {
   home-manager.users.syu =  (import ./home.nix) inputs;
