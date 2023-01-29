@@ -65,13 +65,15 @@
         mouse.accelProfile = "flat";
         touchpad.naturalScrolling = true;
       };
-      # modules = with pkgs; [
-      #   xf86_input_wacom
-      # ];
       videoDrivers = [ "nvidia" "amdgpu" ];
       wacom.enable = true;
 
-      windowManager.i3.enable = true;
+      xautolock = {
+        enable = true;
+        killtime = 10;
+        killer = "/run/current-system/systemd/bin/systemctl suspend";
+        nowlocker = "${pkgs.xlockmore}/bin/xlock";
+      };
 
       displayManager = {
         lightdm = {
@@ -90,11 +92,6 @@
             name = "river";
             start = "river && waitPID=$!";
           }
-          # {
-          #   manage = "desktop";
-          #   name = "LeftWM";
-          #   start = "exec $HOME/.xsession";
-          # }
         ];
       };
     };

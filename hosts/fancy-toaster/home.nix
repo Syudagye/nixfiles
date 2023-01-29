@@ -24,9 +24,7 @@
   };
 
   home.packages = with pkgs; [
-    pavucontrol
     lxde.lxsession
-    neofetch
     xorg.xkill
 
     ### Dev
@@ -51,6 +49,11 @@
       settings = {
         "webgl.disabled" = false;
       };
+    };
+
+    alacritty = {
+      enable = true;
+      settings = import ../../config/alacritty.nix { fontSize = 8; };
     };
   };
 

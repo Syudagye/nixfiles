@@ -6,10 +6,16 @@
   ];
 
   config = {
-    home.packages = with pkgs; [
-      ### Custom scripts
-      (writeShellScriptBin "tablet-config" (builtins.readFile ../home/bin/tablet-config))
-    ];
+    home = {
+      packages = with pkgs; [
+        ### Custom scripts
+        (writeShellScriptBin "tablet-config" (builtins.readFile ../home/bin/tablet-config))
+      ];
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+    };
+
 
     services = {
       udiskie.enable = true;

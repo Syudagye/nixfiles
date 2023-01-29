@@ -8,6 +8,11 @@
 
       packages = with pkgs; [ ];
 
+      sessionPath = [
+        "$HOME/.cargo/bin"
+        "$HOME/.local/bin"
+      ];
+
       stateVersion = "22.05";
     };
 
