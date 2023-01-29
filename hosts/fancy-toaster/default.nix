@@ -1,11 +1,9 @@
-{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... } @ inputs:
+{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... }:
 
 {
   imports = [
     ../../modules
   ];
-
-  home-manager.users.syu =  (import ./home.nix) inputs;
 
   nix = {
     settings = {
@@ -22,7 +20,6 @@
   };
 
   networking.hostName = "fancy-toaster";
-  networking.firewall.allowedTCPPorts = [ 3334 3333 4444 ];
 
   programs = {
     gnupg.agent = {
@@ -68,9 +65,9 @@
         mouse.accelProfile = "flat";
         touchpad.naturalScrolling = true;
       };
-      modules = with pkgs; [
-        xf86_input_wacom
-      ];
+      # modules = with pkgs; [
+      #   xf86_input_wacom
+      # ];
       videoDrivers = [ "nvidia" "amdgpu" ];
       wacom.enable = true;
 
@@ -120,9 +117,9 @@
     # Others
     openssh.enable = true;
     upower.enable = true;
-    udev.extraRules = ''
-      ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"amdgpu_bl1\", GROUP=\"video\", MODE=\"0664\", RUN+=\"${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness\"
-    '';
+    # udev.extraRules = ''
+    #   ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"amdgpu_bl1\", GROUP=\"video\", MODE=\"0664\", RUN+=\"${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness\"
+    # '';
     udisks2.enable = true;
 
     # for thunar
@@ -138,15 +135,15 @@
     # Battery saving
     tlp = {
       enable = true;
-      settings = {
-        SOUND_POWER_SAVE_ON_AC = 0;
-        SOUND_POWER_SAVE_ON_BAT = 1;
-        SOUND_POWER_SAVE_CONTROLLER = "N";
-        PLATFORM_PROFILE_ON_AC = "performance";
-        PLATFORM_PROFILE_ON_BAT = "low-power";
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
+      # settings = {
+      #   SOUND_POWER_SAVE_ON_AC = 0;
+      #   SOUND_POWER_SAVE_ON_BAT = 1;
+      #   SOUND_POWER_SAVE_CONTROLLER = "N";
+      #   PLATFORM_PROFILE_ON_AC = "performance";
+      #   PLATFORM_PROFILE_ON_BAT = "low-power";
+      #   CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      # };
     };
   };
   # Enable sound.

@@ -2,21 +2,14 @@
 
 {
   imports = [
-    ../../config/rofi.nix
+    ../config/rofi.nix
   ];
 
   config = {
-    home = {
-      packages = with pkgs; [
-        ### Custom scripts
-        (writeShellScriptBin "tablet-config" (builtins.readFile ../../home/bin/tablet-config))
-        (writeShellScriptBin "volume" (builtins.readFile ../../home/bin/volume))
-      ];
-
-      file.".config/leftwm/config.ron".source = ../../home/leftwm/config.ron;
-      file.".config/leftwm/themes/fancy-toaster".source = ../../home/leftwm/themes/fancy-toaster;
-      file.".config/lefthk/config.ron".source = ../../home/lefthk.ron;
-    };
+    home.packages = with pkgs; [
+      ### Custom scripts
+      (writeShellScriptBin "tablet-config" (builtins.readFile ../home/bin/tablet-config))
+    ];
 
     services = {
       udiskie.enable = true;

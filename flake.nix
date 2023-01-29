@@ -51,12 +51,15 @@
           ./config/common.nix
 
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = inputs;
+            };
             nixpkgs.overlays = overlays;
           }
         ];
-        extraArgs = inputs // { inherit breezex-cursor; };
+        extraArgs = inputs;
       };
 
       hosts = {
@@ -64,6 +67,9 @@
           system = "x86_64-linux";
           modules = [
             home-manager.nixosModules.home-manager
+            {
+              home-manager.users.syu = import ./hosts/fancy-toaster/home.nix;
+            }
             ./hosts/fancy-toaster/hardware-configuration.nix
             ./hosts/fancy-toaster
           ];
@@ -88,7 +94,7 @@
           ./hosts/common/home-desktop.nix
           ./hosts/archbtw/home.nix
         ];
-        extraSpecialArgs = inputs // { inherit breezex-cursor; };
+        extraSpecialArgs = inputs;
       };
     };
 }
