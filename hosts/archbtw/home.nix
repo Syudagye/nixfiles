@@ -6,7 +6,6 @@ in
 {
   imports = [
     ../../modules/home
-    ../../config/rofi.nix
     ../../config/common-home.nix
     ../../config/common-home-desktop.nix
   ];
@@ -24,7 +23,7 @@ in
         owner = "Syudagye";
         repo = "leftwm-sunset";
         rev = "master";
-        sha256 = "1gvvyjlmkbwf11z99glbhh2svr2537sbwhym5292b37718c97mkl";
+        sha256 = "0mr3n1nf3z2606clka0cqmzmgsg0n0q8r33dqxnqw0gxs0ri1jmb";
       };
       lefthk.enable = true;
     };

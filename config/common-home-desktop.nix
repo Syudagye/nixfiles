@@ -1,10 +1,6 @@
 { config, pkgs, lib, nix-gaming, leftwm, lefthk, ... }:
 
 {
-  imports = [
-    ../config/rofi.nix
-  ];
-
   config = {
     home = {
       packages = with pkgs; [
@@ -14,6 +10,7 @@
       sessionVariables = {
         EDITOR = "nvim";
       };
+    file.".config/rofi/config.rasi".source = ../home/rofi.config.rasi;
     };
 
 

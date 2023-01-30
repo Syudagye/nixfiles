@@ -3,7 +3,6 @@
 {
   imports = [
     ../../modules/home
-    ../../config/rofi.nix
     ../../config/common-home.nix
     ../../config/common-home-desktop.nix
   ];
@@ -26,6 +25,7 @@
   home.packages = with pkgs; [
     lxde.lxsession
     xorg.xkill
+    rofi
 
     ### Dev
     neovide
