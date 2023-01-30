@@ -33,9 +33,6 @@
     rustup
     nodejs
     mono
-
-    ### custom scripts
-    (writeShellScriptBin "tablet-config" (builtins.readFile ../../home/bin/tablet-config))
   ];
 
   programs = {

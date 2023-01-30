@@ -90,8 +90,6 @@
       homeConfigurations.archbtw = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit overlays; system = "x86_64-linux"; };
         modules = [
-          ./hosts/common/home.nix
-          ./hosts/common/home-desktop.nix
           ./hosts/archbtw/home.nix
         ];
         extraSpecialArgs = inputs;
