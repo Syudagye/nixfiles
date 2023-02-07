@@ -1,7 +1,8 @@
 { config, pkgs, nixpkgs-unstable, ... } @ inputs:
 
 {
-  home-manager.users.syu = (import ./home.nix) inputs;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # NETWORKING
   networking = {
@@ -11,6 +12,8 @@
       25566
       25575
       25576
+      22222
+      80
     ];
   };
 
@@ -22,6 +25,20 @@
   # SERVICES
   services = {
     openssh.enable = true;
+    mysql.enable = true;
+    mysql.package = pkgs.mariadb;
+
+    nginx = {
+      enable = true;
+      virtualHosts.home-page = {
+        #default = true;
+        root = "/www";
+        locations."/" = {
+          index = "index.html";
+          #tryFiles = "$uri =404";
+        };
+      };
+    };
   };
 
   # CONTAINERS

@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05-aarch64";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-stable = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -81,7 +81,10 @@
           extraArgs = { nixpkgs-unstable = nixpkgs; };
           modules = [
             home-manager-stable.nixosModules.home-manager
-            /etc/nixos/hardware-configuration.nix
+            {
+              home-manager.users.syu = import ./hosts/free-real-estate/home.nix;
+            }
+            ./hosts/free-real-estate/hardware-configuration.nix
             ./hosts/free-real-estate
           ];
         };

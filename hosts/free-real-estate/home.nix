@@ -1,12 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home = {
-    username = "syu";
-    homeDirectory = "/home/syu";
-
-    packages = with pkgs; [ ];
-
-    stateVersion = "22.05";
-  };
+  imports = [
+    ../../config/common-home.nix
+  ];
+  home.stateVersion = "22.05";
 }
