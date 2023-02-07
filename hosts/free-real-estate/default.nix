@@ -1,13 +1,9 @@
 { config, pkgs, nixpkgs-unstable, ... } @ inputs:
 
 {
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMointPoint = "/efi";
-    };
-  };
+  imports = [
+    ../../modules/boot.nix
+  ];
 
   # NETWORKING
   networking = {
