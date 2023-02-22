@@ -45,6 +45,7 @@
       enable = true;
       settings = {
         "webgl.disabled" = false;
+        "middlemouse.paste" = false;
       };
     };
 
