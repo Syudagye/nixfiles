@@ -22,23 +22,25 @@ in
     };
     gtk = {
       enable = true;
-      # cursorTheme.package = pkgs.libsForQt5.breeze-gtk;
       theme = {
-        name = "vimix-dark-compact-amethyst";
-        package = pkgs.vimix-gtk-themes;
+        name = "Breeze";
+        package = pkgs.libsForQt5.breeze-gtk;
       };
       cursorTheme = {
         name = "BreezeX-Dark";
         package = pkgs.breezex-cursor;
       };
       iconTheme = {
-        name = "Vimix-Amethyst-dark";
-        package = pkgs.vimix-icon-theme;
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
       };
     };
     qt = {
       enable = true;
-      platformTheme = "gtk";
+      style = {
+        package = pkgs.libsForQt5.breeze-qt5;
+        name = "Breeze";
+      };
     };
   };
 }
