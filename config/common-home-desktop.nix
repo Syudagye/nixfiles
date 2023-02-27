@@ -9,8 +9,9 @@
       ];
       sessionVariables = {
         EDITOR = "nvim";
+        XKB_DEFAULT_LAYOUT = "fr";
       };
-    file.".config/rofi/config.rasi".source = ../home/rofi.config.rasi;
+      file.".config/rofi/config.rasi".source = ../home/rofi.config.rasi;
     };
 
 

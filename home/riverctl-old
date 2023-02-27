@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# -=+=-
+# Config
+# -=+=-
+
+# -=+=-
+# Programs
+# -=+=-
+
+riverctl map normal Mod4 Return spawn "alacritty"
+riverctl map normal Mod4 d spawn "rofi -show drun"
+
+# -=+=-
+# Windows management
+# -=+=-
+
+riverctl map normal Mod4 k focus-view previous
+riverctl map normal Mod4 j focus-view next
+riverctl map normal Mod4+Shift k swap previous
+riverctl map normal Mod4+Shift j swap next
+riverctl map normal Mod4+Shift Return zoom
+
+riverctl map normal Mod4 f toggle-fullscreen
+riverctl map normal Mod4+Shift Space toggle-float
+
+riverctl map normal Mod4+Shift q close
+riverctl map normal Mod4+Shift x exit
+
+# Floating windows
+riverctl declare-mode float-ctrl
+riverctl map normal Mod4 twosuperior enter-mode float-ctrl
+riverctl map float-ctrl Mod4 twosuperior enter-mode normal
+riverctl map float-ctrl None Esc enter-mode normal
+
+riverctl map -repeat float-ctrl None h move left 20
+riverctl map -repeat float-ctrl None j move down 20
+riverctl map -repeat float-ctrl None k move up 20
+riverctl map -repeat float-ctrl None l move right 20
+riverctl map float-ctrl Control h snap left
+riverctl map float-ctrl Control j snap down
+riverctl map float-ctrl Control k snap up
+riverctl map float-ctrl Control l snap right
+riverctl map -repeat float-ctrl Shift h resize horizontal -20
+riverctl map -repeat float-ctrl Shift j resize vertical -20
+riverctl map -repeat float-ctrl Shift k resize vertical 20
+riverctl map -repeat float-ctrl Shift l resize horizontal 20
+
+riverctl map-pointer normal Mod4 BTN_LEFT move-view
+riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
+
+# -=+=-
+# Tags
+# -=+=-
+
+# Tags ids are powers of 2, because it's represented as bitfields
+
+riverctl map normal Mod4 ampersand  set-focused-tags 1
+riverctl map normal Mod4 eacute     set-focused-tags 2
+riverctl map normal Mod4 quotedbl   set-focused-tags 4
+riverctl map normal Mod4 apostrophe set-focused-tags 8
+riverctl map normal Mod4 prenleft   set-focused-tags 16
+riverctl map normal Mod4 minus      set-focused-tags 32
+riverctl map normal Mod4 egrave     set-focused-tags 64
+riverctl map normal Mod4 underscore set-focused-tags 128
+riverctl map normal Mod4 ccedilla   set-focused-tags 256
+riverctl map normal Mod4 dollar     set-focused-tags 512
+
+riverctl map normal Mod4+Shift ampersand  set-view-tags 1
+riverctl map normal Mod4+Shift eacute     set-view-tags 2
+riverctl map normal Mod4+Shift quotedbl   set-view-tags 4
+riverctl map normal Mod4+Shift apostrophe set-view-tags 8
+riverctl map normal Mod4+Shift prenleft   set-view-tags 16
+riverctl map normal Mod4+Shift minus      set-view-tags 32
+riverctl map normal Mod4+Shift egrave     set-view-tags 64
+riverctl map normal Mod4+Shift underscore set-view-tags 128
+riverctl map normal Mod4+Shift ccedilla   set-view-tags 256
+riverctl map normal Mod4+Shift dollar     set-view-tags 512
+
+riverctl map normal Mod4+Control ampersand  toggle-focused-tags 1
+riverctl map normal Mod4+Control eacute     toggle-focused-tags 2
+riverctl map normal Mod4+Control quotedbl   toggle-focused-tags 4
+riverctl map normal Mod4+Control apostrophe toggle-focused-tags 8
+riverctl map normal Mod4+Control prenleft   toggle-focused-tags 16
+riverctl map normal Mod4+Control minus      toggle-focused-tags 32
+riverctl map normal Mod4+Control egrave     toggle-focused-tags 64
+riverctl map normal Mod4+Control underscore toggle-focused-tags 128
+riverctl map normal Mod4+Control ccedilla   toggle-focused-tags 256
+riverctl map normal Mod4+Control dollar     toggle-focused-tags 512
+
+riverctl map normal Mod4+Mod1 ampersand  toggle-view-tags 1
+riverctl map normal Mod4+Mod1 eacute     toggle-view-tags 2
+riverctl map normal Mod4+Mod1 quotedbl   toggle-view-tags 4
+riverctl map normal Mod4+Mod1 apostrophe toggle-view-tags 8
+riverctl map normal Mod4+Mod1 prenleft   toggle-view-tags 16
+riverctl map normal Mod4+Mod1 minus      toggle-view-tags 32
+riverctl map normal Mod4+Mod1 egrave     toggle-view-tags 64
+riverctl map normal Mod4+Mod1 underscore toggle-view-tags 128
+riverctl map normal Mod4+Mod1 ccedilla   toggle-view-tags 256
+riverctl map normal Mod4+Mod1 dollar     toggle-view-tags 512
+
+# -=+=-
+# Layouts
+# -=+=-
+
+riverctl default-layout rivertile
+exec rivertile &
+
+# -=+=-
+# Programs
+# -=+=-
+
+exec waybar &
+exec wpaperd &

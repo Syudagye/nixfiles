@@ -33,7 +33,15 @@
     rustup
     nodejs
     mono
+
+    river
+    ristate
+    wayshot
   ];
+  home.file.".config/river/init" = {
+    executable = true;
+    source = (pkgs.writeShellScript "riverctl" (builtins.readFile ../../home/riverctl)).outPath;
+  };
 
   programs = {
     git.signing = {
