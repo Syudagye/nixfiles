@@ -23,7 +23,7 @@ in
     gtk = {
       enable = true;
       theme = {
-        name = "Breeze";
+        name = "Breeze-Dark";
         package = pkgs.libsForQt5.breeze-gtk;
       };
       cursorTheme = {
@@ -39,7 +39,7 @@ in
       enable = true;
       style = {
         package = pkgs.libsForQt5.breeze-qt5;
-        name = "Breeze";
+        name = "Breeze-Dark";
       };
     };
   };
