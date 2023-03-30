@@ -1,4 +1,4 @@
-{ config, pkgs, nixpkgs-unstable, ... } @ inputs:
+{ config, pkgs, ... } @ inputs:
 
 {
   imports = [
@@ -49,7 +49,7 @@
         autoStart = true;
         bindMounts = {
           "/minecraft" = {
-            hostPath = "/home/syu/${folder}";
+            hostPath = "/data/minecraft/${folder}";
             isReadOnly = false;
           };
         };
@@ -64,7 +64,7 @@
           }
         ];
         extraFlags = [ "-U" ];
-        nixpkgs = nixpkgs-unstable;
+        # nixpkgs = nixpkgs-unstable;
 
         config = { config, pkgs, ... }: {
           networking = {

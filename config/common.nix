@@ -30,7 +30,6 @@
   users.users.syu = {
     isNormalUser = true;
     initialPassword = "";
-    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "video" "dialout" "wireshark" ];
   };
 

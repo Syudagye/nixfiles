@@ -21,6 +21,8 @@
     extraModprobeConfig = "options tuxedo_keyboard color_left=0x00ffff brightness=100";
   };
 
+  users.users.syu.shell = pkgs.zsh;
+
   networking.hostName = "fancy-toaster";
 
   programs = {

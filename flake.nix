@@ -73,7 +73,7 @@
 
         free-real-estate = {
           system = "aarch64-linux";
-          channelName = "nixpkgs-stable";
+          # channelName = "nixpkgs-stable";
           extraArgs = { nixpkgs-unstable = nixpkgs; };
           modules = [
             home-manager-stable.nixosModules.home-manager
