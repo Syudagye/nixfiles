@@ -2,9 +2,12 @@
 
 {
   imports = [
+    ../.
+    ../desktop-common
+
     ../../modules/home
-    ../../config/common-home.nix
-    ../../config/common-home-desktop.nix
+
+    ../../config/river
   ];
 
   syu = {
@@ -38,10 +41,6 @@
     ristate
     wayshot
   ];
-  home.file.".config/river/init" = {
-    executable = true;
-    source = (pkgs.writeShellScript "riverctl" (builtins.readFile ../../home/riverctl)).outPath;
-  };
 
   programs = {
     git.signing = {

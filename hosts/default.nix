@@ -35,8 +35,7 @@
 
   # SYSTEM PACKAGES
   environment.systemPackages = with pkgs; [
-    vim
-    neovim # Yep both editors cuz why not
+    neovim
     wget
     dosfstools
     w3m

@@ -5,5 +5,5 @@ with pkgs; [
   feh
   xdotool
   # eww
-  eww-systray.packages.${pkgs.system}.eww-wayland
+  eww-systray.packages.${pkgs.system}.eww
 ]

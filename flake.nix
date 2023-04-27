@@ -15,83 +15,52 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     leftwm.url = "github:Syudagye/leftwm";
     lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
-    flake-utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     eww-systray.url = github:Syudagye/eww;
   };
 
   outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
     let
-      pkgs = self.pkgs.x86_64-linux.nixpkgs;
-      clickgen = pkgs.callPackage ./pkgs/clickgen.nix {
-        inherit (pkgs.python3Packages) buildPythonPackage pythonOlder pytestCheckHook pillow python toml numpy attrs;
-        inherit (pkgs.xorg) libXcursor libX11;
-      };
-      breezex-cursor = pkgs.callPackage ./pkgs/breezex-cursor {
-        inherit clickgen;
-      };
-      overlays = [
-        (self: super: {
-          inherit breezex-cursor;
-        })
-      ];
+      mksys = { nixpkgs, inputs, system, hostname, username }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = inputs;
+          modules = [
+            # System configuration
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+            ./hardware/${hostname}
+            ./hosts
+            ./hosts/${hostname}
+            ./overlays.nix
+
+            # Home configuration
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = inputs;
+                users.${username} = import ./home/${hostname};
+              };
+            }
+          ];
+        };
     in
-    flake-utils.lib.mkFlake rec {
-      inherit self inputs;
-
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
-      channelsConfig.allowUnfree = true;
-      sharedOverlays = overlays;
-
-      hostDefaults = {
-        modules = [
-          ./config/common.nix
-
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = inputs;
-            };
-            nixpkgs.overlays = overlays;
-          }
-        ];
-        extraArgs = inputs;
-      };
-
-      hosts = {
-        fancy-toaster = {
+    rec {
+      nixosConfigurations = {
+        fancy-toaster = mksys {
+          inherit nixpkgs inputs;
           system = "x86_64-linux";
-          modules = [
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.syu = import ./hosts/fancy-toaster/home.nix;
-            }
-            ./hosts/fancy-toaster/hardware-configuration.nix
-            ./hosts/fancy-toaster
-          ];
+          hostname = "fancy-toaster";
+          username = "syu";
         };
-
-        free-real-estate = {
+        free-real-estate = mksys {
+          inherit nixpkgs inputs;
           system = "aarch64-linux";
-          # channelName = "nixpkgs-stable";
-          extraArgs = { nixpkgs-unstable = nixpkgs; };
-          modules = [
-            home-manager-stable.nixosModules.home-manager
-            {
-              home-manager.users.syu = import ./hosts/free-real-estate/home.nix;
-            }
-            ./hosts/free-real-estate/hardware-configuration.nix
-            ./hosts/free-real-estate
-          ];
+          hostname = "free-real-estate";
+          username = "syu";
         };
-      };
-
-      homeConfigurations.archbtw = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { inherit overlays; system = "x86_64-linux"; };
-        modules = [
-          ./hosts/archbtw/home.nix
-        ];
-        extraSpecialArgs = inputs;
       };
     };
 }
