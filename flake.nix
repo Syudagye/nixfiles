@@ -32,7 +32,6 @@
             ./hardware/${hostname}
             ./hosts
             ./hosts/${hostname}
-            ./overlays.nix
 
             # Home configuration
             inputs.home-manager.nixosModules.home-manager
@@ -48,6 +47,7 @@
         };
     in
     rec {
+      # Systems configs
       nixosConfigurations = {
         fancy-toaster = mksys {
           inherit nixpkgs inputs;
@@ -62,5 +62,24 @@
           username = "syu";
         };
       };
+
+      # home-manager configs
+      homeConfigurations.archbtw =
+        let
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+          };
+          overlays = (import ./overlays.nix) pkgs;
+        in
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            inherit overlays;
+          };
+          modules = [
+            ./home/archbtw
+          ];
+          extraSpecialArgs = inputs;
+        };
     };
 }

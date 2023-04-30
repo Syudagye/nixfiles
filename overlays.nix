@@ -13,6 +13,8 @@ let
     })
   ];
 in
-{
-  nixpkgs.overlays = overlays;
-}
+[
+  (self: super: {
+    inherit breezex-cursor;
+  })
+]

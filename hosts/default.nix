@@ -1,6 +1,7 @@
 { config, pkgs, ... } @ inputs:
 
 {
+  nixpkgs.overlays = (import ../overlays.nix) inputs;
   nix = {
     settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {

@@ -5,9 +5,9 @@ let
 in
 {
   imports = [
+    ../.
+    ../desktop-common
     ../../modules/home
-    ../../config/common-home.nix
-    ../../config/common-home-desktop.nix
   ];
 
   syu = {
