@@ -22,6 +22,8 @@
   };
 
   users.users.syu.shell = pkgs.zsh;
+  # Needed here (might fix it later)
+  programs.zsh.enable = true;
 
   networking.hostName = "fancy-toaster";
 
