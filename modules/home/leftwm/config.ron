@@ -93,6 +93,7 @@
         (command: MoveToTag, value: "8", modifier: ["modkey", "Shift"], key: "underscore"),
         (command: MoveToTag, value: "9", modifier: ["modkey", "Shift"], key: "ccedilla"),
         (command: MoveToTag, value: "10", modifier: ["modkey", "Shift"], key: "dollar"),
+        (command: ToggleSticky, value: "", modifier: ["modkey"], key: "p"),
     ],
     state_path: None,
 )
