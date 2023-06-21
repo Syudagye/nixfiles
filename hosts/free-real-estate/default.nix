@@ -15,6 +15,7 @@
       25576
       22222
       80
+      443
     ];
   };
 
@@ -31,15 +32,30 @@
 
     nginx = {
       enable = true;
-      virtualHosts.home-page = {
-        #default = true;
+      virtualHosts."syu.ovh" = {
+        enableACME = true;
+        forceSSL = true;
         root = "/www";
         locations."/" = {
           index = "index.html";
-          #tryFiles = "$uri =404";
         };
       };
     };
+
+    nextcloud = {
+      enable = true;
+      hostName = "nextcloud.syu.ovh";
+      home = "/data/nextcloud";
+      config.adminpassFile = "/data/nextpass";
+      https = true;
+      package = pkgs.nextcloud25;
+    };
+  };
+
+  # ACME
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "syudagye@gmail.com";
   };
 
   # CONTAINERS
