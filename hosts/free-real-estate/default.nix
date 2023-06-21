@@ -32,12 +32,18 @@
 
     nginx = {
       enable = true;
-      virtualHosts."syu.ovh" = {
-        enableACME = true;
-        forceSSL = true;
-        root = "/www";
-        locations."/" = {
-          index = "index.html";
+      virtualHosts = {
+        "syu.ovh" = {
+          enableACME = true;
+          forceSSL = true;
+          root = "/www";
+          locations."/" = {
+            index = "index.html";
+          };
+        };
+        ${config.services.nextcloud.hostName} = {
+          forceSSL = true;
+          enableACME = true;
         };
       };
     };
