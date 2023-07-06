@@ -45,6 +45,13 @@
           forceSSL = true;
           enableACME = true;
         };
+        "searx.syu.ovh" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8081";
+          };
+        };
       };
     };
 
@@ -54,7 +61,23 @@
       home = "/data/nextcloud";
       config.adminpassFile = "/data/nextpass";
       https = true;
-      package = pkgs.nextcloud25;
+      package = pkgs.nextcloud26;
+      enableBrokenCiphersForSSE = false;
+    };
+
+    searx = {
+      enable = true;
+      package = pkgs.searxng;
+      settings = {
+        server = {
+          port = 8081;
+          bind_address = "0.0.0.0";
+          secret_key = "i like trains";
+          image_proxy = true;
+        };
+        general.instance_name = "SearXNG - syu.ovh";
+        search.safe_search = 1;
+      };
     };
   };
 
