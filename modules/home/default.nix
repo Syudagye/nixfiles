@@ -3,5 +3,6 @@ inputs: {
     ./shell.nix
     ./theming.nix
     ./leftwm
+    ./hyprland
   ];
 }

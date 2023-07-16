@@ -1,6 +1,10 @@
-{ config, pkgs, nix-gaming, leftwm, lefthk, ... }:
+{ config, pkgs, nix-gaming, leftwm, lefthk, hyprland, ... }:
 
 {
+  imports = [
+    hyprland.homeManagerModules.default
+  ];
+
   config = {
     home = {
       username = "syu";

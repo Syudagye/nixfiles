@@ -27,6 +27,10 @@ in
       };
       lefthk.enable = true;
     };
+    hyprland = {
+      enable = true;
+      installWithNix = false;
+    };
   };
 
   home = {
