@@ -10,6 +10,8 @@ in
     ../../modules/home
   ];
 
+  targets.genericLinux.enable = true;
+
   syu = {
     theming.enable = true;
     shell = {
@@ -35,6 +37,7 @@ in
 
   home = {
     file.".config/alacritty/alacritty.yml".source = alacritty;
+    file.".config/nix/nix.conf".source = ./nix.conf;
   };
 
   programs = {
