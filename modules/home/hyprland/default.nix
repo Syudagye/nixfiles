@@ -23,6 +23,7 @@ in
 
   config.home = mkIf (cfg.enable && !cfg.installWithNix) {
     file.".config/hypr/hyprland.conf".source = cfg.config;
+    file.".config/wpaperd".source = ./wpaperd;
   };
 
   config.wayland.windowManager.hyprland = mkIf (cfg.enable && cfg.installWithNix) {
