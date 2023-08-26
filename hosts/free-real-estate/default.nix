@@ -134,48 +134,48 @@
     {
       bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
       crea = mkMCContainer "crea" 25564 25574;
-      redbot = {
-        autoStart = true;
-        config = { config, pkgs, ... }: {
-          system.stateVersion = "22.05";
-          users.users.redbot = {
-            isNormalUser = true;
-            extraGroups = [ "wheel" ];
-          };
-          # SYSTEM PACKAGES
-          environment = {
-            systemPackages = with pkgs; [
-              neovim
-              (pkgs.python39.withPackages (p: [ p.pip ]))
-              jdk11_headless
-              gcc
-              gnumake
-              screen
-              (pkgs.writeShellScriptBin "setup-bot" ''
-                python3.9 -m venv ~/
-                source ~/bin/activate
-                python -m pip install -U pip setuptools wheel
-                python -m pip install -U Red-DiscordBot
-                redbot-setup --instance-name "${redbotInstance}"
-                redbot "${redbotInstance}"
-              '')
-            ];
-            variables.REDBOT_INSTANCE_NAME = "muzik_trouville";
-          };
-          # Redbot service
-          systemd.services.redbot = {
-            description = "Redbot service";
-            after = [ "network.target" ];
-            wantedBy = [ "multi-user.target" ];
-            path = [ pkgs.jdk11_headless ];
-            serviceConfig = {
-              ExecStart = "/home/redbot/bin/python -O -m redbot ${redbotInstance} --no-prompt";
-              Type = "idle";
-              User = "redbot";
-            };
-          };
-        };
-      };
+      # redbot = {
+      #   autoStart = true;
+      #   config = { config, pkgs, ... }: {
+      #     system.stateVersion = "22.05";
+      #     users.users.redbot = {
+      #       isNormalUser = true;
+      #       extraGroups = [ "wheel" ];
+      #     };
+      #     # SYSTEM PACKAGES
+      #     environment = {
+      #       systemPackages = with pkgs; [
+      #         neovim
+      #         (pkgs.python39.withPackages (p: [ p.pip ]))
+      #         jdk11_headless
+      #         gcc
+      #         gnumake
+      #         screen
+      #         (pkgs.writeShellScriptBin "setup-bot" ''
+      #           python3.9 -m venv ~/
+      #           source ~/bin/activate
+      #           python -m pip install -U pip setuptools wheel
+      #           python -m pip install -U Red-DiscordBot
+      #           redbot-setup --instance-name "${redbotInstance}"
+      #           redbot "${redbotInstance}"
+      #         '')
+      #       ];
+      #       variables.REDBOT_INSTANCE_NAME = "muzik_trouville";
+      #     };
+      #     # Redbot service
+      #     systemd.services.redbot = {
+      #       description = "Redbot service";
+      #       after = [ "network.target" ];
+      #       wantedBy = [ "multi-user.target" ];
+      #       path = [ pkgs.jdk11_headless ];
+      #       serviceConfig = {
+      #         ExecStart = "/home/redbot/bin/python -O -m redbot ${redbotInstance} --no-prompt";
+      #         Type = "idle";
+      #         User = "redbot";
+      #       };
+      #     };
+      #   };
+      # };
     };
 
   # This value determines the NixOS release from which the default
