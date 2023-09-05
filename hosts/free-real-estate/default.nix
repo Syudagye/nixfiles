@@ -9,8 +9,10 @@
   networking = {
     hostName = "free-real-estate";
     firewall.allowedTCPPorts = [
+      25565
       25575
-      25575
+      25564
+      25574
       22222
       80
       443
