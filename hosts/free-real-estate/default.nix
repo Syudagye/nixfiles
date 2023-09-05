@@ -102,52 +102,59 @@
   };
 
   # CONTAINERS
-  containers =
-    let
-      mkMCContainer = folder: mcPort: rconPort: {
-        autoStart = true;
-        bindMounts = {
-          "/minecraft" = {
-            hostPath = "/data/minecraft/${folder}";
-            isReadOnly = false;
-          };
-        };
-        forwardPorts = [
-          {
-            containerPort = 25565;
-            hostPort = mcPort;
-          }
-          {
-            containerPort = 25575;
-            hostPort = rconPort;
-          }
-        ];
-        extraFlags = [ "-U" ];
-        # nixpkgs = nixpkgs-unstable;
+  # containers =
+  #   let
+  #     mkMCContainer = folder: mcPort: rconPort: {
+  #       autoStart = true;
+  #       bindMounts = {
+  #         "/minecraft" = {
+  #           hostPath = "/data/minecraft/${folder}";
+  #           isReadOnly = false;
+  #         };
+  #       };
+  #       forwardPorts = [
+  #         {
+  #           containerPort = 25565;
+  #           hostPort = mcPort;
+  #         }
+  #         {
+  #           containerPort = 25575;
+  #           hostPort = rconPort;
+  #         }
+  #       ];
+  #       extraFlags = [ "-U" ];
+  #       # nixpkgs = nixpkgs-unstable;
+  #
+  #       config = { config, pkgs, ... }: {
+  #         networking = {
+  #           firewall.allowedTCPPorts = [
+  #             25565
+  #             25575
+  #           ];
+  #         };
+  #
+  #         services.minecraft-server = {
+  #           enable = true;
+  #           package = pkgs.papermc;
+  #           eula = true;
+  #           dataDir = "/minecraft";
+  #         };
+  #
+  #         system.stateVersion = "22.05";
+  #       };
+  #     };
+  #   in
+  #   {
+  #     bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
+  #     crea = mkMCContainer "crea" 25564 25574;
+  #   };
 
-        config = { config, pkgs, ... }: {
-          networking = {
-            firewall.allowedTCPPorts = [
-              25565
-              25575
-            ];
-          };
-
-          services.minecraft-server = {
-            enable = true;
-            package = pkgs.papermc;
-            eula = true;
-            dataDir = "/minecraft";
-          };
-
-          system.stateVersion = "22.05";
-        };
-      };
-    in
-    {
-      bootleg-spa = mkMCContainer "bootleg-spa" 25565 25575;
-      crea = mkMCContainer "crea" 25564 25574;
-    };
+  # Extra packages
+  environment.systemPackages = with pkgs; [
+    # For minecraft servers
+    screen
+    jdk17_headless
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
