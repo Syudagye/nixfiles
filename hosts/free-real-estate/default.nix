@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/boot.nix
+    inputs.funky-tags.nixosModule.default
   ];
 
   # NETWORKING
@@ -92,6 +93,12 @@
         general.instance_name = "SearXNG - syu.ovh";
         search.safe_search = 1;
       };
+    };
+
+    funky-tags = {
+      enable = true;
+      data = /data/funky-tags;
+      vhost = "funkytags.syu.ovh";
     };
   };
 

@@ -17,6 +17,7 @@
     lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
     eww-systray.url = github:Syudagye/eww;
     hyprland.url = github:hyprwm/hyprland;
+    funky-tags = github:Syudagye/funky-tags;
   };
 
   outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
