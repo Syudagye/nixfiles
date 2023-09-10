@@ -1,9 +1,9 @@
-{ config, pkgs, ... } @ inputs:
+{ config, pkgs, funky-tags, ... } @ inputs:
 
 {
   imports = [
     ../../modules/boot.nix
-    inputs.funky-tags.nixosModule.default
+    funky-tags.nixosModules.default
   ];
 
   # NETWORKING
@@ -97,7 +97,7 @@
 
     funky-tags = {
       enable = true;
-      data = /data/funky-tags;
+      data = "/data/funky-tags";
       vhost = "funkytags.syu.ovh";
     };
   };
