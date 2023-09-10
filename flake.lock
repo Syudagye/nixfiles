@@ -171,11 +171,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1694305557,
-        "narHash": "sha256-AOMU9JPSohuUiuKZRmtmHKgnBh97hwxg1BYEm+UTyQ0=",
+        "lastModified": 1694353502,
+        "narHash": "sha256-t1za2QRkQYRcNHenQi8hWvPdzNWo7qYEQGUbpN8kI5M=",
         "owner": "Syudagye",
         "repo": "funky-tags",
-        "rev": "66b648dbb293c34eafdfef6d91aee9a6d5541749",
+        "rev": "ddbfab21edd49d2c31f830918c5df0eb08877128",
         "type": "github"
       },
       "original": {
