@@ -1,5 +1,6 @@
 [HDMI-A-1]
-path = "/home/syu/.config/wpaperd/dragon-flying.jpg"
+path = "/home/syu/.config/wpaperd/yharon.png"
 
 [DP-1]
-path = "/home/syu/.config/wpaperd/foxxo.png"
+# path = "/home/syu/.config/wpaperd/foxxo.png"
+path = "/home/syu/.config/wpaperd/dragon-flying.jpg"
