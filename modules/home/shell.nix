@@ -15,26 +15,36 @@ in
       type = types.bool;
       default = false;
     };
+    enableOpam = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      exa
+      eza
+      opam
     ];
     programs = {
-      zsh = {
-        enable = true;
-        enableAutosuggestions = true;
-        syntaxHighlighting.enable = true;
-        defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
-        initExtra = ''
-          source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-        '';
-        shellAliases = {
-          ls = "exa -l --git --icons";
-          la = "ls -a";
+      zsh =
+        let
+          opamInit = if cfg.enableOpam then "eval `${pkgs.opam}/bin/opam env`" else "";
+        in
+        {
+          enable = true;
+          enableAutosuggestions = true;
+          syntaxHighlighting.enable = true;
+          defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
+          initExtra = ''
+            source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+            ${opamInit}
+          '';
+          shellAliases = {
+            ls = "eza -l --git --icons";
+            la = "ls -a";
+          };
         };
-      };
       starship = {
         enable = cfg.enableStarship;
         settings = {

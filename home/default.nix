@@ -50,6 +50,8 @@
           preview = true;
         };
       };
+
+      eza.enable = true;
     };
   };
 }
