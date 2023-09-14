@@ -18,6 +18,7 @@
 
       ### Common packages
       tex
+      pandoc
 
       iosevka-bin
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
