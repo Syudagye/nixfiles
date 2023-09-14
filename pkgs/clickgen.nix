@@ -7,6 +7,7 @@
 , toml
 , numpy
 , attrs
+, pyyaml
 , libX11
 , libXcursor
 , libpng
@@ -16,7 +17,7 @@
 
 buildPythonPackage rec {
   pname = "clickgen";
-  version = "2.1.3";
+  version = "2.1.8";
   format = "setuptools";
 
   disabled = pythonOlder "3.8";
@@ -25,12 +26,12 @@ buildPythonPackage rec {
     owner = "ful1e5";
     repo = "clickgen";
     rev = "v${version}";
-    sha256 = "0b4iba4cjgv8ji1rqyqkvjh3a1v18czjp8idvjjvq2cahxy94dm8";
+    sha256 = "0c5ka8jqcdrvc2gmznryphr12yqp3g8cj8wb2y9b6p2rljlwx2gg";
   };
 
   buildInputs = [ libXcursor libX11 libpng ];
 
-  propagatedBuildInputs = [ pillow toml numpy attrs ];
+  propagatedBuildInputs = [ pillow toml numpy attrs pyyaml ];
 
   checkInputs = [ pytestCheckHook ];
 
