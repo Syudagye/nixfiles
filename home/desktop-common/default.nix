@@ -5,11 +5,19 @@
     ../../config/dunst.nix
     ../../config/rofi
   ];
-  # config = {
+
   home = {
-    packages = with pkgs; [
+    packages = with pkgs; let
+      tex = (texlive.combine {
+        inherit (texlive) scheme-basic xcolor;
+      });
+    in
+    [
       ### Custom scripts
       (writeShellScriptBin "tablet-config" (builtins.readFile ./scripts/tablet-config))
+
+      ### Common packages
+      tex
     ];
     sessionVariables = {
       EDITOR = "nvim";
