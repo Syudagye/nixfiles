@@ -47,18 +47,6 @@
     };
   };
 
-  # FONTS
-  fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
-      iosevka-bin
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
-    ];
-    fontconfig.defaultFonts = {
-      monospace = [ "Iosevka" ];
-    };
-  };
-
   # SERVICES
   services = {
 

@@ -18,11 +18,16 @@
 
       ### Common packages
       tex
+
+      iosevka-bin
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
     ];
     sessionVariables = {
       EDITOR = "nvim";
       XKB_DEFAULT_LAYOUT = "fr";
     };
+
+    file.".config/fontconfig/fonts.conf".source = ./fonts.conf;
   };
 
   services = {
@@ -42,7 +47,8 @@
       publicShare = "$HOME";
       templates = "$HOME";
       videos = "$HOME/Videos";
-      # };
     };
   };
+
+  fonts.fontconfig.enable = true;
 }
