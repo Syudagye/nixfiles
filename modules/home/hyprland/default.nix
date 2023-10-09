@@ -15,19 +15,10 @@ in
       type = types.path;
       default = ./hyprland.conf;
     };
-    installWithNix = mkOption {
-      type = types.bool;
-      default = true;
-    };
   };
 
-  config.home = mkIf (cfg.enable && !cfg.installWithNix) {
+  config.home = mkIf cfg.enable {
     file.".config/hypr/hyprland.conf".source = cfg.config;
     file.".config/wpaperd".source = ./wpaperd;
-  };
-
-  config.wayland.windowManager.hyprland = mkIf (cfg.enable && cfg.installWithNix) {
-    inherit (cfg) enable;
-    recommendedEnvironment = true;
   };
 }

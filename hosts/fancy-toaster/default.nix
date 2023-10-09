@@ -21,7 +21,14 @@
     extraModprobeConfig = "options tuxedo_keyboard color_left=0x00ffff brightness=100";
   };
 
-  users.users.syu.shell = pkgs.zsh;
+  users.users.syu = {
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+      # for my Hyprland config
+      wl-clipboard
+      wpaperd
+    ];
+  };
   # Needed here (might fix it later)
   programs.zsh.enable = true;
 
@@ -44,6 +51,11 @@
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
+    };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      enableNvidiaPatches = true;
     };
   };
 
@@ -70,21 +82,15 @@
       };
 
       displayManager = {
-        lightdm = {
+        sddm = {
           enable = true;
-          greeters.gtk.enable = true;
-          extraConfig = "logind-check-graphical=true";
+          autoNumlock = true;
         };
         session = [
           {
             manage = "window";
             name = "leftwm";
             start = "leftwm && waitPID=$!";
-          }
-          {
-            manage = "window";
-            name = "river";
-            start = "river && waitPID=$!";
           }
         ];
       };
@@ -136,6 +142,11 @@
       #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       # };
     };
+    flatpak.enable = true;
+  };
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
   };
   # Enable sound.
   sound.enable = true;

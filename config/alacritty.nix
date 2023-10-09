@@ -1,4 +1,3 @@
-{ fontSize ? 10 }:
 {
   window = {
     padding = {
@@ -25,7 +24,7 @@
       family = "Iosevka Term";
       style = "Bold Italic";
     };
-    size = fontSize;
+    size = 10;
     offset.x = 1;
   };
   colors = {

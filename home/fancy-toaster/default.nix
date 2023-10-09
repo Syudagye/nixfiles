@@ -23,11 +23,10 @@
         laptop = true;
       };
     };
+    hyprland.enable = true;
   };
 
   home.packages = with pkgs; [
-    lxde.lxsession
-    xorg.xkill
     rofi
 
     ### Dev
@@ -58,7 +57,7 @@
 
     alacritty = {
       enable = true;
-      settings = import ../../config/alacritty.nix { fontSize = 8; };
+      settings = import ../../config/alacritty.nix;
     };
   };
 
@@ -70,5 +69,9 @@
       xrdb ~/.Xresources
     '';
     numlock.enable = true;
+  };
+
+  xresources.properties = {
+    "Xft.dpi" = 96; # Fix for font size in alacritty + neovide
   };
 }
