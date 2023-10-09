@@ -3,24 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05-aarch64";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05-aarch64";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-22.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    leftwm.url = "github:Syudagye/leftwm";
-    lefthk.url = "github:Syudagye/lefthk?ref=nix-flake";
+    # home-manager-stable = {
+    #   url = "github:nix-community/home-manager/release-22.05";
+    #   inputs.nixpkgs.follows = "nixpkgs-stable";
+    # };
+    leftwm.url = github:Syudagye/leftwm;
+    lefthk.url = github:leftwm/lefthk;
     eww-systray.url = github:Syudagye/eww;
     hyprland.url = github:hyprwm/hyprland;
     funky-tags.url = github:Syudagye/funky-tags;
   };
 
-  outputs = { self, nixpkgs, home-manager, home-manager-stable, flake-utils, nix-gaming, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
     let
       mksys = { nixpkgs, inputs, system, hostname, username }:
         nixpkgs.lib.nixosSystem {
