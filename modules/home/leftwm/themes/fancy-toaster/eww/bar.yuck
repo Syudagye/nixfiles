@@ -25,6 +25,8 @@
   `cat /sys/class/power_supply/BAT0/capacity`)
 (defpoll battery-status :interval "10s"
   `cat /sys/class/power_supply/BAT0/status`)
+(defpoll battery-time-left :interval "10s"
+  `upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "time to empty" | awk '{print $4 " " $5}'`)
 
 ;; Left module (tags and layout)
 
@@ -53,7 +55,7 @@
 (defwidget right []
   (box :class "right" :halign "end" :space-evenly false :spacing 12
     (system-infos)
-    (system-tray)
+    (systray :class "systray" :pack-direction "rtl" :icon-size 18)
     ;;(system-menu)
     (time)))
 
@@ -67,7 +69,7 @@
             :tooltip "${round(EWW_DISK['/'].used / EWW_DISK['/'].total, 4) * 100}%")
     (metric :value { battery == "" ? 0 : battery }
             :label {battery-status == "Charging" ? "bat(+)" : "bat"}
-            :tooltip "${battery}%")))
+            :tooltip {battery-status == "Charging" ? "${battery}% - charging" : "${battery}% - ${battery-time-left} left"})))
 
 (defwidget metric [label value tooltip]
   (box :space-evenly false

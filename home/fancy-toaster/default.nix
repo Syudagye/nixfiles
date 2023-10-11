@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nix-gaming, leftwm, lefthk, eww-systray, ... }:
+{ config, pkgs, lib, nix-gaming, leftwm, lefthk, eww, ... }:
 
 {
   imports = [
@@ -28,6 +28,7 @@
 
   home.packages = with pkgs; [
     rofi
+    (eww.packages.x86_64-linux.eww)
 
     ### Dev
     neovide

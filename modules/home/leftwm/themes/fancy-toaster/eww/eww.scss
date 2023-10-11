@@ -167,3 +167,23 @@ $accent-color: #ffa666;
     }
 }
 
+.systray > menuitem > window {
+    border-radius: 6px;
+    menu {
+        background-color: $bg-color;
+        separator {
+            min-height: 4px;
+        }
+        menuitem {
+            margin: 4px;
+            padding: 3px;
+            font-size: 12px;
+            border-radius: 3px;
+            &:hover {
+                font-weight: bold;
+                background-color: $accent-color;
+                color: $box-color;
+            }
+        }
+    }
+}

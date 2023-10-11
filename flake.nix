@@ -14,7 +14,7 @@
     # };
     leftwm.url = github:Syudagye/leftwm;
     lefthk.url = github:leftwm/lefthk;
-    eww-systray.url = github:Syudagye/eww;
+    eww.url = github:Syudagye/eww/tray-3;
     hyprland.url = github:hyprwm/hyprland;
     funky-tags.url = github:Syudagye/funky-tags;
   };
