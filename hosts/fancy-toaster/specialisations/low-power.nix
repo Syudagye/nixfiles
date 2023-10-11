@@ -1,18 +1,15 @@
-{ config, pkgs, ... }:
+{ lib, ... }:
 
 {
   inheritParentConfig = true;
   configuration = {
-    hardware.nvidia.modesetting.enable = true;
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.prime = {
-      offload.enable = true;
+    virtualisation.virtualbox.host.enable = lib.mkForce false;
+    boot.extraModprobeConfig = ''
+      # Disable ethernet interface
+      blacklist r8169
 
-      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-      amdgpuBusId = "PCI:01:00:0";
-
-      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-      nvidiaBusId = "PCI:05:00:0";
-    };
+      # Disables some bluetooth related things
+      blacklist btusb
+    '';
   };
 }
