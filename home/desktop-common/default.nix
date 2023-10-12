@@ -9,7 +9,7 @@
   home = {
     packages = with pkgs; let
       tex = (texlive.combine {
-        inherit (texlive) scheme-basic xcolor;
+        inherit (texlive) scheme-full xcolor booktabs fancyvrb;
       });
     in
     [

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  alacritty = (pkgs.formats.yaml { }).generate "alacritty.yml" (import ../../config/alacritty.nix { });
+  alacritty = (pkgs.formats.yaml { }).generate "alacritty.yml" (import ../../config/alacritty.nix);
 in
 {
   imports = [
@@ -30,10 +30,7 @@ in
       };
       lefthk.enable = true;
     };
-    hyprland = {
-      enable = true;
-      installWithNix = false;
-    };
+    hyprland.enable = true;
   };
 
   home = {
