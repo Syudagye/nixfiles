@@ -26,21 +26,24 @@
     hyprland.enable = true;
   };
 
-  home.packages = with pkgs; [
-    rofi
-    (eww.packages.x86_64-linux.eww)
+  home = {
+    file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
+    packages = with pkgs; [
+      rofi
+      (eww.packages.x86_64-linux.eww)
 
-    ### Dev
-    neovide
-    rnix-lsp
-    rustup
-    nodejs
-    mono
+      ### Dev
+      neovide
+      rnix-lsp
+      rustup
+      nodejs
+      mono
 
-    river
-    ristate
-    wayshot
-  ];
+      river
+      ristate
+      wayshot
+    ];
+  };
 
   programs = {
     git.signing = {
@@ -56,10 +59,7 @@
       };
     };
 
-    alacritty = {
-      enable = true;
-      settings = import ../../config/alacritty.nix;
-    };
+    alacritty.enable = true;
   };
 
   xsession = {

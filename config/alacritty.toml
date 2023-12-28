@@ -1,0 +1,33 @@
+[colors]
+background = "#2e2e38"
+foreground = "#c7c7d1"
+
+[font]
+size = 10
+
+[font.bold]
+family = "Iosevka Term"
+style = "Bold"
+
+[font.bold_italic]
+family = "Iosevka Term"
+style = "Bold Italic"
+
+[font.italic]
+family = "Iosevka Term"
+style = "Italic"
+
+[font.normal]
+family = "Iosevka Term"
+style = "Regular"
+
+[font.offset]
+x = 1
+
+[window]
+dynamic_padding = true
+dynamic_title = true
+
+[window.padding]
+x = 10
+y = 9

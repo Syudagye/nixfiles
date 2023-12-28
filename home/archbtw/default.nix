@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  alacritty = (pkgs.formats.yaml { }).generate "alacritty.yml" (import ../../config/alacritty.nix);
-in
 {
   imports = [
     ../.
@@ -34,7 +31,7 @@ in
   };
 
   home = {
-    file.".config/alacritty/alacritty.yml".source = alacritty;
+    file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
     file.".config/nix/nix.conf".source = ./nix.conf;
   };
 
