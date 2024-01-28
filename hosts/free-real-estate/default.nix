@@ -17,6 +17,7 @@
       22222
       80
       443
+      1818 # Firefox syncserver
     ];
   };
 
