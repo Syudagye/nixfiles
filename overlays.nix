@@ -7,7 +7,7 @@ let
   breezex-cursor = pkgs.callPackage ./pkgs/breezex-cursor {
     inherit clickgen;
   };
-  syncstorage-rs = pkgs.callPackage ./pkgs/syncstorage-rs { };
+  syncstorage-rs = pkgs.callPackage ./pkgs/syncstorage-rs.nix { };
   overlays = [
     (self: super: {
       inherit breezex-cursor;
