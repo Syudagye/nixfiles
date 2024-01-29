@@ -162,6 +162,9 @@
     # For minecraft servers
     screen
     jdk17_headless
+
+    # Firefox sync
+    syncstorage-rs
   ];
 
   # This value determines the NixOS release from which the default
