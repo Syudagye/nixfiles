@@ -22,7 +22,7 @@ let
     owner = "mozilla-services";
     repo = pname;
     rev = "refs/tags/${version}";
-    hash = "sha256-7lIFHK0XSOtfDEy6N9jcPGOd5Por5i1CBdDZQBiHm8c=";
+    hash = "sha256-Q9r8a+PTb3GMH50d/e2fKoG67zVhtW1kx4QA7Pj82Sw=";
   };
 
 in
