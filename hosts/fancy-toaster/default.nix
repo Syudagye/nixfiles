@@ -5,13 +5,6 @@
     ../../modules
   ];
 
-  nix = {
-    settings = {
-      substituters = [ "https://nix-gaming.cachix.org" ];
-      trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
-    };
-  };
-
   specialisation = (import ./specialisations) inputs;
 
   # custom modules
@@ -55,7 +48,6 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      enableNvidiaPatches = true;
     };
   };
 
@@ -114,9 +106,6 @@
     # Others
     openssh.enable = true;
     upower.enable = true;
-    # udev.extraRules = ''
-    #   ACTION==\"add\", SUBSYSTEM==\"backlight\", KERNEL==\"amdgpu_bl1\", GROUP=\"video\", MODE=\"0664\", RUN+=\"${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness\"
-    # '';
     udisks2.enable = true;
 
     # for thunar
@@ -130,26 +119,19 @@
     };
 
     # Battery saving
-    tlp = {
-      enable = true;
-      # settings = {
-      #   SOUND_POWER_SAVE_ON_AC = 0;
-      #   SOUND_POWER_SAVE_ON_BAT = 1;
-      #   SOUND_POWER_SAVE_CONTROLLER = "N";
-      #   PLATFORM_PROFILE_ON_AC = "performance";
-      #   PLATFORM_PROFILE_ON_BAT = "low-power";
-      #   CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      # };
-    };
+    tlp.enable = true;
+
     flatpak.enable = true;
   };
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
   };
+
   # Enable sound.
   sound.enable = true;
+
   # Enable OpenGL for 32-bit
   hardware = {
     opengl = {
@@ -176,7 +158,18 @@
     rtkit.enable = true;
   };
 
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation = {
+    virtualbox.host.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.ovmf = {
+        enable = true;
+        packages = with pkgs; [
+          OVMFFull.fd
+        ];
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

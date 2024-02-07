@@ -31,7 +31,7 @@
   users.users.syu = {
     isNormalUser = true;
     initialPassword = "";
-    extraGroups = [ "wheel" "networkmanager" "video" "dialout" "wireshark" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "dialout" "wireshark" "libvirt" ];
   };
 
   # SYSTEM PACKAGES
