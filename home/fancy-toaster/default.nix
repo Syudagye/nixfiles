@@ -67,7 +67,7 @@
     enable = true;
     profileExtra = ''
       lefthk &
-      lxsession &
+      ${pkgs.lxde.lxsession.outPath} &
       xrdb ~/.Xresources
     '';
     numlock.enable = true;

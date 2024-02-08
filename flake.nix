@@ -12,7 +12,7 @@
     #   url = "github:nix-community/home-manager/release-22.05";
     #   inputs.nixpkgs.follows = "nixpkgs-stable";
     # };
-    leftwm.url = github:Syudagye/leftwm;
+    leftwm.url = github:Syudagye/leftwm/x11rb;
     lefthk.url = github:leftwm/lefthk;
     eww.url = github:Syudagye/eww/tray-3;
     hyprland.url = github:hyprwm/hyprland;
