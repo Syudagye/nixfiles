@@ -1,6 +1,6 @@
 [colors]
-background = "#2e2e38"
-foreground = "#c7c7d1"
+# background = "#2e2e38"
+# foreground = "#c7c7d1"
 
 [font]
 size = 10
