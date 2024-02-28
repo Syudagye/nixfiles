@@ -3,15 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05-aarch64";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # home-manager-stable = {
-    #   url = "github:nix-community/home-manager/release-22.05";
-    #   inputs.nixpkgs.follows = "nixpkgs-stable";
-    # };
     leftwm.url = github:Syudagye/leftwm/x11rb;
     lefthk.url = github:leftwm/lefthk;
     eww.url = github:Syudagye/eww/tray-3;

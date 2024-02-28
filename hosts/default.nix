@@ -12,6 +12,7 @@
       dates = [ "weekly" ];
       automatic = true;
     };
+    registry.nixpkgs.flake = inputs.nixpkgs;
   };
 
   # NETWORKING

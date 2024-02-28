@@ -57,7 +57,7 @@
     # X11 CONFIG
     xserver = {
       enable = true;
-      layout = "fr";
+      xkb.layout = "fr";
       libinput = {
         enable = true;
         mouse.accelProfile = "flat";
