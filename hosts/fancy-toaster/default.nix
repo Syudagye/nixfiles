@@ -158,16 +158,13 @@
     rtkit.enable = true;
   };
 
-  virtualisation = {
-    virtualbox.host.enable = true;
-    libvirtd = {
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.ovmf = {
       enable = true;
-      qemu.ovmf = {
-        enable = true;
-        packages = with pkgs; [
-          OVMFFull.fd
-        ];
-      };
+      packages = with pkgs; [
+        OVMFFull.fd
+      ];
     };
   };
 

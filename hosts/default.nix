@@ -49,4 +49,7 @@
     htop
     neofetch
   ];
+
+  # USEFUL PROGRAMS
+  programs.nix-ld.enable = true;
 }
