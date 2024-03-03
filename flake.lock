@@ -342,11 +342,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1708791355,
-        "narHash": "sha256-52rPMrL5iWBj5zMLyiPmyO37Mg6x4guBOM08KrtYG3E=",
+        "lastModified": 1709474022,
+        "narHash": "sha256-0iL7HxXu6IfS9Bni9KmjlCIg2bZgFvPt3jF8hcKrGw0=",
         "owner": "Syudagye",
         "repo": "leftwm",
-        "rev": "3bb5b77f58e9cdc1102e435567252931bc7f90dd",
+        "rev": "7fb3a7e528cce13b8e02e644b725762ebbc10a59",
         "type": "github"
       },
       "original": {
