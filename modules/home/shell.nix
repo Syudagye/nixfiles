@@ -33,7 +33,7 @@ in
         in
         {
           enable = true;
-          enableAutosuggestions = true;
+          autosuggestion.enable = true;
           syntaxHighlighting.enable = true;
           defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
           initExtra = ''

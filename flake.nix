@@ -2,14 +2,14 @@
   description = "Syu's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
     leftwm.url = github:Syudagye/leftwm/x11rb;
     lefthk.url = github:leftwm/lefthk;
-    eww.url = github:Syudagye/eww/tray-3;
+    eww.url = github:elkowar/eww;
     hyprland.url = github:hyprwm/hyprland;
     funky-tags.url = github:Syudagye/funky-tags;
   };
