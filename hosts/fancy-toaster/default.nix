@@ -82,7 +82,7 @@
           {
             manage = "window";
             name = "leftwm";
-            start = "leftwm --backend x11rb && waitPID=$!";
+            start = "leftwm && waitPID=$!";
           }
         ];
       };

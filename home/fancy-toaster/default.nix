@@ -35,7 +35,6 @@
 
       ### Dev
       neovide
-      rnix-lsp
       rustup
       nodejs
       mono

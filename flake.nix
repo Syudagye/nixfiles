@@ -7,7 +7,8 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    leftwm.url = github:Syudagye/leftwm/x11rb;
+    # leftwm.url = github:Syudagye/leftwm/x11rb;
+    leftwm.url = github:leftwm/leftwm;
     lefthk.url = github:leftwm/lefthk;
     eww.url = github:elkowar/eww;
     hyprland.url = github:hyprwm/hyprland;

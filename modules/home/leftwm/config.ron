@@ -9,6 +9,8 @@
 
 #![enable(implicit_some)]
 (
+    log_level: "debug",
+    backend: X11rb,
     modkey: "Mod4",
     mousekey: "Mod4",
     workspaces: [],

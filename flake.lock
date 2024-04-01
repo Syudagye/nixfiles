@@ -356,16 +356,15 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1711033371,
-        "narHash": "sha256-5nVtCt4PDMb45ixRVL7VwDHPPyPMS6qquqilK6h12W4=",
-        "owner": "Syudagye",
+        "lastModified": 1709746908,
+        "narHash": "sha256-RF7PgtWecen3sj0h7FuTNDVX/ZppgpEKe9sEYDGDtNA=",
+        "owner": "leftwm",
         "repo": "leftwm",
-        "rev": "acfda028e6f543cfb3d5b1d24b96e14ca2d00612",
+        "rev": "671fab081d675b25539cd6e241bc3d8063847cfb",
         "type": "github"
       },
       "original": {
-        "owner": "Syudagye",
-        "ref": "x11rb",
+        "owner": "leftwm",
         "repo": "leftwm",
         "type": "github"
       }
