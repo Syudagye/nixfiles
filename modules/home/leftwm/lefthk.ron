@@ -1,5 +1,6 @@
 #![enable(implicit_some)]
 Config(
+    default_modifier: [],
     keybinds: [
         Keybind(
             command: Execute("volume 2"),
