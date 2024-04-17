@@ -12,10 +12,11 @@
 
       packages = with pkgs; [
         (writeShellScriptBin "nix-trim-generations" (builtins.readFile (fetchurl {
-          url = "https://gist.githubusercontent.com/Bondrake/27555c9d02c2882fd5e32f8ab3ed620b/raw/e1e5dd68761a7f7e6a253fcb64905466104b9df9/trim-generations.sh";
-          sha256 = "0kkcxazaay71zdf7jqrsh6fpyzyji361fcfzcpdd4dmf68nj8xq3";
+          url = "https://gist.githubusercontent.com/MaxwellDupre/3077cd229490cf93ecab08ef2a79c852/raw/ccb39ba6304ee836738d4ea62999f4451fbc27f7/trim-generations.sh";
+          sha256 = "17qi417436d57f7kbnwm70dakqg377rf6ss1r11xp92jq61r71ch";
         }).outPath))
         sccache
+        emscripten
       ];
 
       sessionPath = [
@@ -25,6 +26,7 @@
 
       sessionVariables = {
         RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
+        C_INCLUDE_PATH = "${pkgs.emscripten}/share/emscripten/cache/sysroot/include/";
       };
 
       stateVersion = "22.05";
