@@ -58,11 +58,6 @@
     xserver = {
       enable = true;
       xkb.layout = "fr";
-      libinput = {
-        enable = true;
-        mouse.accelProfile = "flat";
-        touchpad.naturalScrolling = true;
-      };
       videoDrivers = [ "nvidia" "amdgpu" ];
       wacom.enable = true;
 
@@ -73,19 +68,29 @@
         nowlocker = "${pkgs.xlockmore}/bin/xlock";
       };
 
-      displayManager = {
-        sddm = {
-          enable = true;
-          autoNumlock = true;
-        };
-        session = [
-          {
-            manage = "window";
-            name = "leftwm";
-            start = "leftwm && waitPID=$!";
-          }
-        ];
+      displayManager.session = [
+        {
+          manage = "window";
+          name = "leftwm";
+          start = "leftwm && waitPID=$!";
+        }
+      ];
+
+      # Fallback to something stable
+      desktopManager.mate.enable = true;
+    };
+
+    displayManager = {
+      sddm = {
+        enable = true;
+        autoNumlock = true;
       };
+    };
+
+    libinput = {
+      enable = true;
+      mouse.accelProfile = "flat";
+      touchpad.naturalScrolling = true;
     };
 
     # Enable CUPS to print documents.
@@ -127,6 +132,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   # Enable sound.
