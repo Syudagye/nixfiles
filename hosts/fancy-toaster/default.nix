@@ -127,6 +127,8 @@
     tlp.enable = true;
 
     flatpak.enable = true;
+
+    syncthing.enable = true;
   };
 
   xdg.portal = {
