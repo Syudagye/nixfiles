@@ -128,7 +128,10 @@
 
     flatpak.enable = true;
 
-    syncthing.enable = true;
+    syncthing = {
+      enable = true;
+      user = "syu";
+    };
   };
 
   xdg.portal = {
