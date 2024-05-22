@@ -77,8 +77,7 @@
       home = "/data/nextcloud";
       config.adminpassFile = "/data/nextpass";
       https = true;
-      package = pkgs.nextcloud27;
-      enableBrokenCiphersForSSE = false;
+      package = pkgs.nextcloud29;
     };
 
     searx = {
