@@ -1,0 +1,4 @@
+fork = true
+idle = true
+maximized = false
+vsync = true

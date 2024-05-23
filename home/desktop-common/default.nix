@@ -29,6 +29,8 @@
     };
 
     file.".config/fontconfig/fonts.conf".source = ./fonts.conf;
+    file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
+    file.".config/neovide/config.toml".source = ../../config/neovide.toml;
   };
 
   services = {

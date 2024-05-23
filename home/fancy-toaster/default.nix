@@ -28,7 +28,6 @@
   };
 
   home = {
-    file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
     packages = with pkgs; [
       rofi
       (eww.packages.x86_64-linux.eww)
