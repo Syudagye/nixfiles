@@ -22,6 +22,7 @@
       wpaperd
     ];
   };
+
   # Needed here (might fix it later)
   programs.zsh.enable = true;
 
@@ -145,11 +146,7 @@
 
   # Enable OpenGL for 32-bit
   hardware = {
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+    graphics.enable = true;
     nvidia.modesetting.enable = true;
     tuxedo-keyboard.enable = true;
   };
@@ -169,14 +166,17 @@
     rtkit.enable = true;
   };
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.ovmf = {
+  virtualisation = {
+    libvirtd = {
       enable = true;
-      packages = with pkgs; [
-        OVMFFull.fd
-      ];
+      qemu.ovmf = {
+        enable = true;
+        packages = with pkgs; [
+          OVMFFull.fd
+        ];
+      };
     };
+    docker.enable = true;
   };
 
   # This value determines the NixOS release from which the default

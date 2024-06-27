@@ -60,6 +60,7 @@ in
           canTouchEfiVariables = true;
         };
       };
+      tmp.useTmpfs = true;
       inherit (cfg) kernelParams extraModprobeConfig;
     };
 }
