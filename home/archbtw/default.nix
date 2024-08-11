@@ -32,7 +32,6 @@
 
   home = {
     file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
-    file.".config/nix/nix.conf".source = ./nix.conf;
   };
 
   programs = {

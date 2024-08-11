@@ -16,20 +16,37 @@
           sha256 = "17qi417436d57f7kbnwm70dakqg377rf6ss1r11xp92jq61r71ch";
         }).outPath))
         sccache
-        emscripten
+
+        # useful cleanup indications
+        xdg-ninja
       ];
 
       sessionPath = [
-        "$HOME/.cargo/bin"
+        "${config.xdg.dataHome}/cargo/bin"
         "$HOME/.local/bin"
       ];
 
       sessionVariables = {
         RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
-        C_INCLUDE_PATH = "${pkgs.emscripten}/share/emscripten/cache/sysroot/include/";
-      };
+      }
+      # Applied suggestions from xdg-ninja
+      // (with config.xdg; {
+        CARGO_HOME = "${dataHome}/cargo";
+        DOTNET_CLI_HOME = "${dataHome}/dotnet";
+        OPAMROOT = "${dataHome}/opam";
+        RUSTUP_HOME = "${dataHome}/rustup";
+        WINEPREFIX = "${dataHome}/wineprefix";
+
+        NUGET_PACKAGES = "${cacheHome}/NuGetPackages";
+        TLDR_CACHE_DIR = "${cacheHome}/tldr";
+      });
+
+      # still xdg-ninja suggestions
+      shellAliases.wget = "wget --hsts-file=${config.xdg.cacheHome}/wget-hsts";
 
       stateVersion = "22.05";
+
+      file.".config/nix/nix.conf".source = ./nix.conf;
     };
 
     programs = {
