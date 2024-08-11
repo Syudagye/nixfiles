@@ -36,7 +36,7 @@
 
   programs = {
     git.signing = {
-      key = "4522BF9BAA21FE93923F311C9DD267B4D9EBFAA1";
+      key = "78018CDAA4B29AB20174988A1FC9186530C9A9DD";
       signByDefault = true;
     };
   };

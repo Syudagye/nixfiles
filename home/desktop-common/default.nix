@@ -14,7 +14,7 @@
     in
     [
       ### Custom scripts
-      (writeShellScriptBin "tablet-config" (builtins.readFile ./scripts/tablet-config))
+      (writeShellScriptBin "plasma-fuck-you" (builtins.readFile ./scripts/plasma-fuck-you.sh))
 
       ### Common packages
       tex
