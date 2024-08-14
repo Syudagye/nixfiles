@@ -6,6 +6,14 @@
   ];
 
   config = {
+    nix = {
+      package = pkgs.nixVersions.nix_2_23;
+      settings = {
+        extra-experimental-features = [ "nix-command" "flakes" ];
+        use-xdg-base-directories = true;
+      };
+    };
+
     home = {
       username = "syu";
       homeDirectory = "/home/syu";
@@ -45,8 +53,6 @@
       shellAliases.wget = "wget --hsts-file=${config.xdg.cacheHome}/wget-hsts";
 
       stateVersion = "22.05";
-
-      file.".config/nix/nix.conf".source = ./nix.conf;
     };
 
     programs = {
