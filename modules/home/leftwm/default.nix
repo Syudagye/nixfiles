@@ -15,6 +15,10 @@ in
       type = types.path;
       default = ./themes/fancy-toaster;
     };
+    config = mkOption {
+      type = types.path;
+      default = ./config.ron;
+    };
     lefthk = {
       enable = mkOption {
         type = types.bool;
@@ -55,7 +59,7 @@ in
     ] else [ ])
     else [ ]);
 
-    file.".config/leftwm/config.ron".source = ./config.ron;
+    file.".config/leftwm/config.ron".source = cfg.config;
     file.".config/leftwm/themes/current".source = cfg.theme;
 
     file.".config/lefthk/config.ron".source = mkIf cfg.lefthk.enable ./lefthk.ron;

@@ -10,11 +10,14 @@
 #![enable(implicit_some)]
 (
     log_level: "debug",
-    // backend: X11rb,
-    backend: XLib,
+    backend: X11rb,
+    // backend: XLib,
     modkey: "Mod4",
     mousekey: "Mod4",
-    workspaces: [],
+    workspaces: [
+        (output: "HDMI-1", y: 0, x:0, width: 1920, height: 1080),
+        (output: "DP-1", y: 0, x:1920, width: 1920, height: 1080),
+    ],
     tags: [
         "dev",
         "web",

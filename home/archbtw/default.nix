@@ -19,6 +19,7 @@
     leftwm = {
       enable = true;
       installPackages = false;
+      config = ./leftwm.ron;
       theme = pkgs.fetchFromGitHub {
         owner = "Syudagye";
         repo = "leftwm-sunset";
