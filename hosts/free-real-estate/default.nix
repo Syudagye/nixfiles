@@ -75,6 +75,13 @@
             proxyPass = "http://127.0.0.1:1818";
           };
         };
+        "syu.ovh:1818" = {
+          # forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:1818";
+          };
+        };
       };
     };
 
