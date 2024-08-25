@@ -68,6 +68,13 @@
             proxyPass = "http://127.0.0.1:25564";
           };
         };
+        "ffsync.syu.ovh" = {
+          # forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:1818";
+          };
+        };
       };
     };
 
