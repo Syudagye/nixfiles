@@ -6,12 +6,9 @@
   ];
 
   config = {
-    nix = {
-      package = pkgs.nixVersions.nix_2_23;
-      settings = {
-        extra-experimental-features = [ "nix-command" "flakes" ];
-        use-xdg-base-directories = true;
-      };
+    nix.settings = {
+      extra-experimental-features = [ "nix-command" "flakes" ];
+      use-xdg-base-directories = true;
     };
 
     home = {

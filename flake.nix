@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     leftwm.url = github:leftwm/leftwm;
-    lefthk.url = github:Syudagye/lefthk;
+    lefthk.url = github:leftwm/lefthk;
     eww.url = github:elkowar/eww;
     hyprland.url = github:hyprwm/hyprland;
     funky-tags.url = github:Syudagye/funky-tags;

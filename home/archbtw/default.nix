@@ -7,6 +7,8 @@
     ../../modules/home
   ];
 
+  nix.package = pkgs.nixVersions.nix_2_23;
+
   targets.genericLinux.enable = true;
 
   syu = {

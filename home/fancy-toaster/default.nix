@@ -65,7 +65,7 @@
     enable = true;
     profileExtra = ''
       ${lefthk.packages.x86_64-linux.lefthk.outPath}/bin/lefthk &
-      ${pkgs.lxde.lxsession.outPath}/bin/lxsession &
+      ${pkgs.lxde.lxsession.outPath}/bin/lxpolkit &
       xrdb ~/.Xresources
     '';
     numlock.enable = true;

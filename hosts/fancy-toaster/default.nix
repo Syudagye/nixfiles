@@ -141,9 +141,6 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  # Enable sound.
-  sound.enable = true;
-
   # Enable OpenGL for 32-bit
   hardware = {
     graphics.enable = true;

@@ -9,9 +9,9 @@
 
 #![enable(implicit_some)]
 (
-    log_level: "debug",
-    // backend: X11rb,
-    backend: XLib,
+    log_level: "trace",
+    backend: X11rb,
+    // backend: XLib,
     modkey: "Mod4",
     mousekey: "Mod4",
     workspaces: [],
