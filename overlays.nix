@@ -7,9 +7,12 @@ let
   breezex-cursor = pkgs.callPackage ./pkgs/breezex-cursor {
     inherit clickgen;
   };
+  syncstorage-rs = pkgs.callPackage ./pkgs/syncstorage-rs.nix {
+    inherit (pkgs) fetchFromGitHub rustPlatform pkg-config python3 cmake libmysqlclient makeBinaryWrapper;
+  };
 in
 [
   (self: super: {
-    inherit breezex-cursor;
+    inherit breezex-cursor syncstorage-rs;
   })
 ]

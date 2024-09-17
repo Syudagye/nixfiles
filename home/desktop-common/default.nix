@@ -31,6 +31,7 @@
     file.".config/fontconfig/fonts.conf".source = ./fonts.conf;
     file.".config/alacritty/alacritty.toml".source = ../../config/alacritty.toml;
     file.".config/neovide/config.toml".source = ../../config/neovide.toml;
+    file.".config/discord-flags.conf".source = ../../config/discord-flags.conf;
   };
 
   services = {

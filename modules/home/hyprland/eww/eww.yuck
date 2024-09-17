@@ -1,0 +1,84 @@
+(defwindow bar :monitor 1
+           :geometry (geometry :x "0%"
+                               :y "0%"
+                               :width "100%"
+                               :height "32px"
+                               :anchor "top center")
+           :stacking "fg"
+           :reserve (struts :distance "32px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+  (box :space-evenly true
+    (left)
+    (title)
+    (right)
+    ))
+
+;; Copied from hyprland.org
+(deflisten workspaces :initial "[]" "bash ./get-workspaces")
+(deflisten current_workspace :initial "1" "bash ./get-active-workspace")
+(defwidget workspaces_widget []
+    (box :space-evenly true
+      (label :text "${workspaces}${current_workspace}" :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id}")
+            )
+          )
+        )
+      )
+    )
+
+;; (defwidget workspaces_widget []
+;;   (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+;;     (box :space-evenly true
+;;       (label :text "${workspaces}${current_workspace}" :visible false)
+;;       (for workspace in workspaces
+;;         (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+;;           (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+;;             (label :text "${workspace.id} hihi")
+;;             )
+;;           )
+;;         )
+;;       )
+;;     )
+;;   )
+
+(deflisten window-title :initial "" "sh ./get-window-title")
+;; (defwidget window_w []
+;;   (box
+;;     (label :text "${window}"
+;;     )
+;;   )
+
+;; Left module (tags and layout)
+
+(defwidget left []
+  (box :class "left" :halign "start" :space-evenly false :spacing 12
+    ;; "hehehe"))
+    (workspaces_widget)))
+    ;; (layout)))
+
+;; Central window title
+
+(defwidget title []
+  (label :class "title"
+         :hexpand true
+         :limit-width 140
+         :text {window-title}))
+
+;; Left module (time, date and systray)
+
+(defpoll hour :interval "1s" `date +%H:%M:%S`)
+(defpoll date :interval "10s" `date "+%a %d %b"`)
+(defwidget time []
+  (box :class "time" :orientation "h"
+    (box :class "date" date)
+    (box :class "hour" hour)
+    ))
+
+(defwidget right []
+  (box :class "right" :halign "end" :space-evenly false :spacing 12 :limit-height 24
+    (time)
+    (systray :pack-direction "rtl")))
