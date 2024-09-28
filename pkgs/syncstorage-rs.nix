@@ -29,6 +29,8 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-ezTwAAtt0/jKfA6FtvzuQVFYOODMcD4RFiU3x0Umifk=";
   };
 
+  buildFeatures = [ "no_auth" ];
+
   nativeBuildInputs = [
     cmake
     makeBinaryWrapper
