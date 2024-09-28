@@ -48,7 +48,7 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = builtins.fetchurl {
       url = "https://github.com/mozilla-services/syncstorage-rs/raw/refs/tags/${version}/Cargo.lock";
-      sha256 = "1l8whp9is82d76x2qmy5x0bc3qsl3isb50b3iyvcvs2nv6673lhr";
+      sha256 = "1rl5abjsv7j1byk027bpbwfl3jw1pckw8knhlkxyqnnd3n5bvdms";
     };
     outputHashes = {
       "deadpool-0.7.0" = "sha256-yQwn45EuzmPBwuT+iLJ/LLWAkBkW2vF+GLswdbpFVAY=";
