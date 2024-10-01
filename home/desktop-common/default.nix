@@ -41,6 +41,20 @@
     };
   };
 
+  programs = {
+    opam = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+      extraOptions = [ "-l" ];
+      git = true;
+      icons = true;
+    };
+  };
+
   xdg = {
     enable = true;
     userDirs = {

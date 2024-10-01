@@ -16,7 +16,6 @@
     shell = {
       enable = true;
       enableStarship = true;
-      enableOpam = true;
     };
     leftwm = {
       enable = true;
