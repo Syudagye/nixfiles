@@ -119,7 +119,11 @@
       };
       settings = {
         node = {
-          seedingPolicy.default = "block";
+          # seedingPolicy.default = "block";
+          seedingPolicy = {
+            default = "allow";
+            scope = "followed";
+          };
           listen = with config.services.radicle.node; [
             "${listenAddress}:${toString listenPort}"
           ];
