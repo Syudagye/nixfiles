@@ -81,7 +81,7 @@
           enableACME = true;
           root = pkgs.radicle-explorer.outPath;
           locations."/" = {
-            index = "index.html";
+            tryFiles = "$uri /index.html";
           };
         };
       };
