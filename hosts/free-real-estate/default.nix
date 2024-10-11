@@ -8,6 +8,7 @@
 
   # NETWORKING
   networking = {
+    domain = "syu.ovh";
     hostName = "free-real-estate";
     firewall.allowedTCPPorts = [
       25565
@@ -35,7 +36,7 @@
     nginx = {
       enable = true;
       virtualHosts = {
-        "syu.ovh" = {
+        ${config.networking.domain} = {
           enableACME = true;
           forceSSL = true;
           root = "/www";
@@ -47,29 +48,29 @@
           forceSSL = true;
           enableACME = true;
         };
-        "searx.syu.ovh" = {
+        "searx.${config.networking.domain}" = {
           forceSSL = true;
           enableACME = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:8081";
           };
         };
-        "bootleg-spa.syu.ovh" = {
+        "bootleg-spa.${config.networking.domain}" = {
           # forceSSL = true;
           enableACME = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:25565";
           };
         };
-        "crea.syu.ovh" = {
+        "crea.${config.networking.domain}" = {
           # forceSSL = true;
           enableACME = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:25564";
           };
         };
-        "ffsync.syu.ovh" = {
-          # forceSSL = true;
+        "ffsync.${config.networking.domain}" = {
+          forceSSL = true;
           enableACME = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:1818";
@@ -80,11 +81,11 @@
 
     nextcloud = {
       enable = true;
-      hostName = "nextcloud.syu.ovh";
+      hostName = "nextcloud.${config.networking.domain}";
       home = "/data/nextcloud";
       config.adminpassFile = "/data/nextpass";
       https = true;
-      package = pkgs.nextcloud29;
+      package = pkgs.nextcloud30;
     };
 
     searx = {
@@ -105,7 +106,36 @@
     funky-tags = {
       enable = true;
       data = "/data/funky-tags";
-      vhost = "funkytags.syu.ovh";
+      vhost = "funkytags.${config.networking.domain}";
+    };
+
+    radicle = {
+      enable = true;
+      privateKeyFile = "/data/radicle/radicle";
+      publicKey = "/data/radicle/radicle.pub";
+      node = {
+        listenPort = 8776;
+        openFirewall = true;
+      };
+      settings = {
+        node = {
+          seedingPolicy.default = "block";
+          listen = with config.services.radicle.node; [
+            "${listenAddress}:${toString listenPort}"
+          ];
+        };
+        web.pinned.repositories = [
+          "rad:z4HqnbBJbu1WeUBLDgLDA88o9yfzT"
+        ];
+      };
+      httpd = {
+        enable = true;
+        nginx = {
+          serverName = "seed.${config.networking.domain}";
+          forceSSL = true;
+          enableACME = true;
+        };
+      };
     };
   };
 
