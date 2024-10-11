@@ -76,6 +76,14 @@
             proxyPass = "http://127.0.0.1:1818";
           };
         };
+        "rad.${config.networking.domain}" = {
+          forceSSL = true;
+          enableACME = true;
+          root = pkgs.radicle-explorer.outPath;
+          locations."/" = {
+            index = "index.html";
+          };
+        };
       };
     };
 
