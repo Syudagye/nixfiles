@@ -41,6 +41,9 @@
         OPAMROOT = "${dataHome}/opam";
         RUSTUP_HOME = "${dataHome}/rustup";
         WINEPREFIX = "${dataHome}/wineprefix";
+        ANDROID_USER_HOME = "${dataHome}/android";
+        GNUPGHOME = "${dataHome}/gnupg";
+        MPLAYER_HOME = "${dataHome}/mplayer";
 
         NUGET_PACKAGES = "${cacheHome}/NuGetPackages";
         TLDR_CACHE_DIR = "${cacheHome}/tldr";
