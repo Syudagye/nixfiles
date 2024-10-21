@@ -2,19 +2,20 @@
   description = "Syu's NixOS flake";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = github:nix-community/home-manager;
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    leftwm.url = github:leftwm/leftwm;
-    lefthk.url = github:leftwm/lefthk;
-    eww.url = github:elkowar/eww;
-    hyprland.url = github:hyprwm/hyprland;
-    funky-tags.url = github:Syudagye/funky-tags;
+    leftwm.url = "github:leftwm/leftwm";
+    lefthk.url = "github:leftwm/lefthk";
+    eww.url = "github:elkowar/eww";
+    hyprland.url = "github:hyprwm/hyprland";
+    funky-tags.url = "github:Syudagye/funky-tags";
+    roc.url = "github:roc-lang/roc";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, ... } @ inputs:
     let
       mksys = { nixpkgs, inputs, system, hostname, username }:
         nixpkgs.lib.nixosSystem {
@@ -41,8 +42,7 @@
             }
           ];
         };
-    in
-    rec {
+    in {
       # Systems configs
       nixosConfigurations = {
         fancy-toaster = mksys {

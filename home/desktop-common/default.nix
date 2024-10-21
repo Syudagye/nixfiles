@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nix-gaming, leftwm, lefthk, ... }:
+{ config, pkgs, roc, ... }:
 
 {
   imports = [
@@ -19,6 +19,7 @@
       ### Common packages
       tex
       pandoc
+      roc.packages.${config.nixpkgs.system}.lang-server
 
       iosevka-bin
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
