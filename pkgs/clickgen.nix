@@ -1,18 +1,19 @@
-{ lib
-, stdenv
-, buildPythonPackage
-, pythonOlder
-, fetchFromGitHub
-, pillow
-, toml
-, numpy
-, attrs
-, pyyaml
-, libX11
-, libXcursor
-, libpng
-, python
-, pytestCheckHook
+{
+  lib,
+  stdenv,
+  buildPythonPackage,
+  pythonOlder,
+  fetchFromGitHub,
+  pillow,
+  toml,
+  numpy,
+  attrs,
+  pyyaml,
+  libX11,
+  libXcursor,
+  libpng,
+  python,
+  pytestCheckHook,
 }:
 
 buildPythonPackage rec {
@@ -29,9 +30,19 @@ buildPythonPackage rec {
     sha256 = "0c5ka8jqcdrvc2gmznryphr12yqp3g8cj8wb2y9b6p2rljlwx2gg";
   };
 
-  buildInputs = [ libXcursor libX11 libpng ];
+  buildInputs = [
+    libXcursor
+    libX11
+    libpng
+  ];
 
-  propagatedBuildInputs = [ pillow toml numpy attrs pyyaml ];
+  propagatedBuildInputs = [
+    pillow
+    toml
+    numpy
+    attrs
+    pyyaml
+  ];
 
   checkInputs = [ pytestCheckHook ];
 

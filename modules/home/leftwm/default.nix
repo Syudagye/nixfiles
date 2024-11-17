@@ -1,5 +1,13 @@
 # LeftWM and LeftHK
-{ lib, pkgs, config, eww-systray, leftwm, lefthk, ... } @ inputs:
+{
+  lib,
+  pkgs,
+  config,
+  eww-systray,
+  leftwm,
+  lefthk,
+  ...
+}@inputs:
 
 with lib;
 let
@@ -36,28 +44,39 @@ in
   };
 
   config.home = mkIf cfg.enable {
-    packages = with pkgs; [
-      (mkIf cfg.installPackages leftwm.packages.${pkgs.system}.leftwm)
-    ]
+    packages =
+      with pkgs;
+      [
+        (mkIf cfg.installPackages leftwm.packages.${pkgs.system}.leftwm)
+      ]
 
-    # import the theme
-    ++ (import (cfg.theme + /deps.nix)) inputs
+      # import the theme
+      ++ (import (cfg.theme + /deps.nix)) inputs
 
-    # setup lefthk
-    ++ (if cfg.lefthk.enable then [
-      (mkIf cfg.installPackages lefthk.packages.${pkgs.system}.lefthk)
+      # setup lefthk
+      ++ (
+        if cfg.lefthk.enable then
+          [
+            (mkIf cfg.installPackages lefthk.packages.${pkgs.system}.lefthk)
 
-      xclip
-      maim
-      (writeShellScriptBin "volume" (builtins.readFile ./scripts/volume))
-    ]
-    # laptop specific config
-    ++ (if cfg.lefthk.laptop then [
-      (writeShellScriptBin "brightness" (builtins.readFile ./scripts/brightness))
-      bc
-      brightnessctl
-    ] else [ ])
-    else [ ]);
+            xclip
+            maim
+            (writeShellScriptBin "volume" (builtins.readFile ./scripts/volume))
+          ]
+          # laptop specific config
+          ++ (
+            if cfg.lefthk.laptop then
+              [
+                (writeShellScriptBin "brightness" (builtins.readFile ./scripts/brightness))
+                bc
+                brightnessctl
+              ]
+            else
+              [ ]
+          )
+        else
+          [ ]
+      );
 
     file.".config/leftwm/config.ron".source = cfg.config;
     file.".config/leftwm/themes/current".source = cfg.theme;

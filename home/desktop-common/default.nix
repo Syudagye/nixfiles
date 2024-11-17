@@ -1,4 +1,9 @@
-{ config, pkgs, roc, ... }:
+{
+  config,
+  pkgs,
+  roc,
+  ...
+}:
 
 {
   imports = [
@@ -7,23 +12,32 @@
   ];
 
   home = {
-    packages = with pkgs; let
-      tex = (texlive.combine {
-        inherit (texlive) scheme-full xcolor booktabs fancyvrb;
-      });
-    in
-    [
-      ### Custom scripts
-      (writeShellScriptBin "plasma-fuck-you" (builtins.readFile ./scripts/plasma-fuck-you.sh))
+    packages =
+      with pkgs;
+      let
+        tex = (
+          texlive.combine {
+            inherit (texlive)
+              scheme-full
+              xcolor
+              booktabs
+              fancyvrb
+              ;
+          }
+        );
+      in
+      [
+        ### Custom scripts
+        (writeShellScriptBin "plasma-fuck-you" (builtins.readFile ./scripts/plasma-fuck-you.sh))
 
-      ### Common packages
-      tex
-      pandoc
-      roc.packages.${config.nixpkgs.system}.lang-server
+        ### Common packages
+        tex
+        pandoc
+        roc.lang-server
 
-      iosevka-bin
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
-    ];
+        iosevka-bin
+        (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      ];
     sessionVariables = {
       EDITOR = "nvim";
       XKB_DEFAULT_LAYOUT = "fr";
@@ -58,7 +72,7 @@
       enableZshIntegration = true;
       extraOptions = [ "-l" ];
       git = true;
-      icons = true;
+      icons = "auto";
     };
   };
 

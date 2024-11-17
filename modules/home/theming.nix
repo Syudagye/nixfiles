@@ -1,5 +1,10 @@
 # Config for GTK, QT, icons and cursor themes
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 with lib;
 let
@@ -23,8 +28,8 @@ in
     gtk = {
       enable = true;
       theme = {
-        name = "Breeze-Dark";
-        package = pkgs.libsForQt5.breeze-gtk;
+        name = "Nordic";
+        package = pkgs.nordic;
       };
       cursorTheme = {
         name = "BreezeX-Dark";
@@ -32,14 +37,14 @@ in
       };
       iconTheme = {
         name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
+        package = pkgs.papirus-nord;
       };
     };
     qt = {
       enable = true;
       style = {
-        package = pkgs.libsForQt5.breeze-qt5;
-        name = "Breeze-Dark";
+        package = pkgs.nordic;
+        name = "Nordic";
       };
     };
   };

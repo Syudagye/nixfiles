@@ -1,4 +1,9 @@
-{ config, pkgs, funky-tags, ... } @ inputs:
+{
+  config,
+  pkgs,
+  funky-tags,
+  ...
+}@inputs:
 
 {
   imports = [

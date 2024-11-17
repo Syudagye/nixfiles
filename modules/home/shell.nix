@@ -1,5 +1,10 @@
 # ZSH, Starship and shell related things
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 with lib;
 let
@@ -49,7 +54,11 @@ in
             "$directory(blue)"
             "$character"
           ];
-          right_format = lib.concatStrings [ "$status" "$cmd_duration" "$jobs" ];
+          right_format = lib.concatStrings [
+            "$status"
+            "$cmd_duration"
+            "$jobs"
+          ];
           character = {
             success_symbol = "[➜](green bold)";
             error_symbol = "[➜](red bold)";
@@ -68,7 +77,7 @@ in
             disabled = false;
           };
           cmd_duration.format = " \\[took [$duration]($style)\\]";
-          jobs .format = " [$symbol$number]($style)";
+          jobs.format = " [$symbol$number]($style)";
         };
       };
     };

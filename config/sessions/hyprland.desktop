@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Hyprland
+Exec=leftwm
+Type=Application
+DesktopNames=LeftWM

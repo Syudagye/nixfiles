@@ -1,6 +1,7 @@
 { pkgs, eww-systray, ... }:
 
-with pkgs; [
+with pkgs;
+[
   picom
   feh
   xdotool

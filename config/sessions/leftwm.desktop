@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=LeftWM
+Comment=A window manager for the adventurer
+Exec=startx
+Type=Application
+DesktopNames=LeftWM

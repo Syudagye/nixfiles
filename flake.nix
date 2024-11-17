@@ -8,52 +8,73 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     leftwm.url = "github:leftwm/leftwm";
-    lefthk.url = "github:leftwm/lefthk";
+    lefthk.url = "github:Syudagye/lefthk";
     eww.url = "github:elkowar/eww";
     hyprland.url = "github:hyprwm/hyprland";
     funky-tags.url = "github:Syudagye/funky-tags";
     roc.url = "github:roc-lang/roc";
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      roc,
+      ...
+    }@inputs:
     let
-      mksys = { nixpkgs, inputs, system, hostname, username }:
+      mksys =
+        {
+          nixpkgs,
+          inputs,
+          hostname,
+          username,
+        }:
         nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = inputs;
           modules = [
             # System configuration
-            {
-              nixpkgs.config.allowUnfree = true;
-            }
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs = {
+                  overlays = import ./overlays.nix;
+                  config.allowUnfree = true;
+                };
+              }
+            )
             ./hardware/${hostname}
             ./hosts
             ./hosts/${hostname}
 
             # Home configuration
             inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = inputs;
-                users.${username} = import ./home/${hostname};
-              };
-            }
+            (
+              { pkgs, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = inputs // {
+                    roc = roc.packages.${pkgs.system};
+                  };
+                  users.${username} = import ./home/${hostname};
+                };
+              }
+            )
           ];
         };
-    in {
+    in
+    {
       # Systems configs
       nixosConfigurations = {
         fancy-toaster = mksys {
           inherit nixpkgs inputs;
-          system = "x86_64-linux";
           hostname = "fancy-toaster";
           username = "syu";
         };
         free-real-estate = mksys {
           inherit nixpkgs inputs;
-          system = "aarch64-linux";
           hostname = "free-real-estate";
           username = "syu";
         };
@@ -64,18 +85,33 @@
         let
           pkgs = import nixpkgs {
             system = "x86_64-linux";
+            overlays = import ./overlays.nix;
           };
-          overlays = (import ./overlays.nix) pkgs;
         in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            inherit overlays;
-          };
+          inherit pkgs;
           modules = [
             ./home/archbtw
           ];
           extraSpecialArgs = inputs;
         };
+
+      formatter =
+        let
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
+        in
+        nixpkgs.lib.genAttrs systems (
+          system:
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = import ./overlays.nix;
+            };
+          in
+          pkgs.nixfmt-rfc-style
+        );
     };
 }

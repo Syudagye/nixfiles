@@ -1,5 +1,10 @@
 # HYPRLAND !!!
-{ lib, pkgs, config, ... } @ inputs:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}@inputs:
 
 with lib;
 let

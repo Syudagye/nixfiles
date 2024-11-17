@@ -1,8 +1,9 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, clickgen
-, mkYarnPackage
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  clickgen,
+  mkYarnPackage,
 }:
 
 let

@@ -1,4 +1,12 @@
-{ config, pkgs, nix-gaming, leftwm, lefthk, eww-systray, ... }@inputs:
+{
+  config,
+  pkgs,
+  nix-gaming,
+  leftwm,
+  lefthk,
+  eww-systray,
+  ...
+}@inputs:
 
 {
   imports = [
@@ -59,7 +67,10 @@
     xserver = {
       enable = true;
       xkb.layout = "fr";
-      videoDrivers = [ "nvidia" "amdgpu" ];
+      videoDrivers = [
+        "nvidia"
+        "amdgpu"
+      ];
       wacom.enable = true;
 
       xautolock = {
@@ -87,6 +98,17 @@
         autoNumlock = true;
       };
     };
+
+    #This is  not cooperating with xorg, i don't know why, and my tgv is arriving, so i'll check later
+    # greetd = {
+    #   enable = true;
+    #   settings = {
+    #     terminal.vt = 2;
+    #     default_session = {
+    #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu --remember --remember-session --sessions ${../../config/sessions}";
+    #     };
+    #   };
+    # };
 
     libinput = {
       enable = true;
@@ -144,8 +166,15 @@
   # Enable OpenGL for 32-bit
   hardware = {
     graphics.enable = true;
-    nvidia.modesetting.enable = true;
-    tuxedo-keyboard.enable = true;
+    nvidia = {
+      open = true;
+      modesetting.enable = true;
+    };
+    tuxedo-drivers.enable = true;
+    tuxedo-rs = {
+      enable = true;
+      tailor-gui.enable = true;
+    };
   };
 
   hardware.nvidia.prime = {

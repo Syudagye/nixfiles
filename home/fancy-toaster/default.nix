@@ -1,4 +1,13 @@
-{ config, pkgs, lib, nix-gaming, leftwm, lefthk, eww, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  nix-gaming,
+  leftwm,
+  lefthk,
+  eww,
+  ...
+}:
 
 {
   imports = [
@@ -40,7 +49,11 @@
       river
       ristate
       wayshot
+
+      xorg.xinit
     ];
+
+    file.".xinitrc".source = ../../config/xinitrc;
   };
 
   programs = {
