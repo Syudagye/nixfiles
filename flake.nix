@@ -34,15 +34,12 @@
           specialArgs = inputs;
           modules = [
             # System configuration
-            (
-              { pkgs, ... }:
-              {
-                nixpkgs = {
-                  overlays = import ./overlays.nix;
-                  config.allowUnfree = true;
-                };
-              }
-            )
+            {
+              nixpkgs = {
+                overlays = import ./overlays.nix;
+                config.allowUnfree = true;
+              };
+            }
             ./hardware/${hostname}
             ./hosts
             ./hosts/${hostname}
@@ -55,9 +52,7 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  extraSpecialArgs = inputs // {
-                    roc = roc.packages.${pkgs.system};
-                  };
+                  extraSpecialArgs = inputs;
                   users.${username} = import ./home/${hostname};
                 };
               }

@@ -33,7 +33,7 @@
         ### Common packages
         tex
         pandoc
-        roc.lang-server
+        roc.packages.${pkgs.system}.full
 
         iosevka-bin
         (nerdfonts.override { fonts = [ "Iosevka" ]; })
