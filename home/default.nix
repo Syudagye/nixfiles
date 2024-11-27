@@ -35,6 +35,7 @@
             }).outPath
         ))
         sccache
+        geode-cli
 
         # useful cleanup indications
         xdg-ninja

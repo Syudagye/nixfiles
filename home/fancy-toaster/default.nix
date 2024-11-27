@@ -51,6 +51,7 @@
       wayshot
 
       xorg.xinit
+      kanata
     ];
 
     file.".xinitrc".source = ../../config/xinitrc;

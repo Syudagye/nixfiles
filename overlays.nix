@@ -55,6 +55,16 @@
         wayland
         ;
     };
-    # inherit breezex-cursor syncstorage-rs neovide;
+    kanata = prev.callPackage ./pkgs/kanata.nix {
+      inherit (prev) fetchFromGitHub rustPlatform;
+    };
+    geode-cli = prev.callPackage ./pkgs/geode-cli.nix {
+      inherit (prev)
+        fetchFromGitHub
+        rustPlatform
+        pkg-config
+        openssl
+        ;
+    };
   })
 ]

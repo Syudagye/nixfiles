@@ -17,12 +17,13 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
-      roc,
       ...
     }@inputs:
     let
+      overlays = import ./overlays.nix;
       mksys =
         {
           nixpkgs,
@@ -36,7 +37,7 @@
             # System configuration
             {
               nixpkgs = {
-                overlays = import ./overlays.nix;
+                inherit overlays;
                 config.allowUnfree = true;
               };
             }
@@ -46,17 +47,14 @@
 
             # Home configuration
             inputs.home-manager.nixosModules.home-manager
-            (
-              { pkgs, ... }:
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = inputs;
-                  users.${username} = import ./home/${hostname};
-                };
-              }
-            )
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = inputs;
+                users.${username} = import ./home/${hostname};
+              };
+            }
           ];
         };
     in
@@ -79,15 +77,13 @@
       homeConfigurations.archbtw =
         let
           pkgs = import nixpkgs {
+            inherit overlays;
             system = "x86_64-linux";
-            overlays = import ./overlays.nix;
           };
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [
-            ./home/archbtw
-          ];
+          modules = [ ./home/archbtw ];
           extraSpecialArgs = inputs;
         };
 
@@ -102,11 +98,12 @@
           system:
           let
             pkgs = import nixpkgs {
-              inherit system;
-              overlays = import ./overlays.nix;
+              inherit system overlays;
             };
           in
           pkgs.nixfmt-rfc-style
         );
+
+      overlays.default = overlays;
     };
 }

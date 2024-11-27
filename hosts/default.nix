@@ -31,17 +31,23 @@
   console.keyMap = "fr-latin1";
 
   # USERS
-  users.users.syu = {
-    isNormalUser = true;
-    initialPassword = "";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "video"
-      "dialout"
-      "wireshark"
-      "libvirt"
-    ];
+  users = {
+    users.syu = {
+      isNormalUser = true;
+      initialPassword = "";
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+        "dialout"
+        "wireshark"
+        "libvirt"
+        "uinput"
+      ];
+    };
+    groups = {
+      uinput = { };
+    };
   };
 
   # SYSTEM PACKAGES
