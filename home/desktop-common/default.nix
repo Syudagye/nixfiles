@@ -35,8 +35,9 @@
         pandoc
         roc.packages.${pkgs.system}.full
 
-        iosevka-bin
-        (nerdfonts.override { fonts = [ "Iosevka" ]; })
+        # iosevka-bin
+        nerd-fonts.iosevka
+        # (nerdfonts.override { fonts = [ "Iosevka" ]; })
       ];
     sessionVariables = {
       EDITOR = "nvim";

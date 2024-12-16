@@ -139,6 +139,8 @@
         };
         web.pinned.repositories = [
           "rad:z4HqnbBJbu1WeUBLDgLDA88o9yfzT"
+          "rad:z3PFZn1eGp2hp5rZmiGB3p3SDPyGJ"
+          "rad:z3pCswqVyjBMcG5WNH1a77S7R2gnR"
         ];
       };
       httpd = {

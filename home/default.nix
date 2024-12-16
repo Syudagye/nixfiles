@@ -1,9 +1,6 @@
 {
   config,
   pkgs,
-  nix-gaming,
-  leftwm,
-  lefthk,
   hyprland,
   ...
 }:
@@ -49,6 +46,7 @@
       sessionVariables =
         {
           RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
+          GHCUP_USE_XDG_DIRS="true";
         }
         # Applied suggestions from xdg-ninja
         // (with config.xdg; {

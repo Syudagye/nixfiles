@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
     ../../modules/home
   ];
 
-  nix.package = pkgs.nixVersions.nix_2_23;
+  nix.package = pkgs.nix;
 
   targets.genericLinux.enable = true;
 
