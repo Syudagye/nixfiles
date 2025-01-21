@@ -38,6 +38,7 @@
         # iosevka-bin
         iosevka
         nerd-fonts.iosevka
+        nerd-fonts.iosevka-term
       ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -94,5 +95,8 @@
   };
 
   gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = [ "IosevkaTerm NF" "IosevkaTerm" ];
+  };
 }

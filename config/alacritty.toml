@@ -6,19 +6,19 @@
 size = 10
 
 [font.bold]
-family = "Iosevka Term"
+family = "IosevkaTerm NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "Iosevka Term"
+family = "IosevkaTerm NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "Iosevka Term"
+family = "IosevkaTerm NF"
 style = "Italic"
 
 [font.normal]
-family = "Iosevka Term"
+family = "IosevkaTerm NF"
 style = "Regular"
 
 [font.offset]
