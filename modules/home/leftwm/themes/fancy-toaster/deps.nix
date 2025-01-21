@@ -1,4 +1,4 @@
-{ pkgs, eww-systray, ... }:
+{ pkgs, ... }:
 
 with pkgs;
 [

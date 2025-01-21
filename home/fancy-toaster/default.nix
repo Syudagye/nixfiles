@@ -1,9 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
-  nix-gaming,
-  leftwm,
   lefthk,
   eww,
   ...
@@ -51,7 +47,6 @@
       wayshot
 
       xorg.xinit
-      kanata
     ];
 
     file.".xinitrc".source = ../../config/xinitrc;
