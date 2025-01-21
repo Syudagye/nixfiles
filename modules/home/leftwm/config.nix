@@ -65,9 +65,13 @@ let
       )
     ''
   );
-  switchToErgol = pkgs.writeShellScript "switchToErgol" ''
-    setxkbmap ergol
-  '';
+  switchToLayout = (
+    layout:
+    pkgs.writeShellScript "leftwm-switch-to-layout" ''
+      setxkbmap ${layout}
+      leftwm-command SoftReload
+    ''
+  );
   azertyKeybinds = ''
     (command: Execute, value: "rofi -show drun", modifier: ["modkey"], key: "d"),
     (command: Execute, value: "alacritty", modifier: ["modkey"], key: "Return"),
@@ -115,6 +119,7 @@ let
     (command: MoveToTag, value: "9", modifier: ["modkey", "Shift"], key: "ccedilla"),
     (command: MoveToTag, value: "10", modifier: ["modkey", "Shift"], key: "dollar"),
     (command: ToggleSticky, value: "", modifier: ["modkey"], key: "p"),
+    (command: Execute, value: "${switchToLayout "fr ergol"}", modifier: ["modkey"], key: "F4"),
   '';
   ergolKeybinds = ''
     (command: Execute, value: "rofi -show drun", modifier: ["modkey"], key: "d"),
@@ -163,6 +168,7 @@ let
     (command: MoveToTag, value: "9", modifier: ["modkey", "Shift"], key: "ccedilla"),
     (command: MoveToTag, value: "10", modifier: ["modkey", "Shift"], key: "dollar"),
     (command: ToggleSticky, value: "", modifier: ["modkey"], key: "p"),
+    (command: Execute, value: "${switchToLayout "fr"}", modifier: ["modkey"], key: "F4"),
   '';
   upscript = pkgs.writeShellScript "up" ''
     layout=$(setxkbmap -query | grep layout | tr -s ' ' | cut --delimiter ' ' --fields 2-)
@@ -184,5 +190,5 @@ in
 {
   inherit upscript downscript;
   azerty = gencfg "azerty.ron" azertyKeybinds;
-  ergol = gencfg "ergol.ron" azertyKeybinds;
+  ergol = gencfg "ergol.ron" ergolKeybinds;
 }

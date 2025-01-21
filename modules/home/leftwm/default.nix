@@ -100,16 +100,5 @@ in
         ".config/leftwm/themes/current".source = cfg.theme;
         ".config/lefthk/config.ron".source = mkIf cfg.lefthk.enable ./lefthk.ron;
       };
-
-    # # Directly write the config file if it's specified
-    # file.".config/leftwm/config.ron".source = mkIf (cfg.config != null) cfg.config;
-    # file.".config/leftwm/themes/current".source = cfg.theme;
-    #
-    # file.".config/lefthk/config.ron".source = mkIf cfg.lefthk.enable ./lefthk.ron;
-
-    # Special case for modular config
-  }
-  # # Special case for modular config
-  # // (mkIf (cfg.config == null) ((import ./config.nix) pkgs))
-  );
+  });
 }

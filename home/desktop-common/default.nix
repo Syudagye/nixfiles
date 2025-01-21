@@ -97,6 +97,9 @@
   gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
   fonts.fontconfig = {
     enable = true;
-    defaultFonts.monospace = [ "IosevkaTerm NF" "IosevkaTerm" ];
+    defaultFonts.monospace = [
+      "IosevkaTerm NF"
+      "IosevkaTerm"
+    ];
   };
 }
