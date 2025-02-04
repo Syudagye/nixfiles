@@ -83,14 +83,14 @@ in
           {
             ".config/leftwm/azerty.ron".source = modularConfigs.azerty;
             ".config/leftwm/ergol.ron".source = modularConfigs.ergol;
-            ".config/leftwm/up" = {
-              source = modularConfigs.upscript;
-              executable = true;
-            };
-            ".config/leftwm/down" = {
-              source = modularConfigs.downscript;
-              executable = true;
-            };
+            # ".config/leftwm/up" = {
+            #   source = modularConfigs.upscript;
+            #   executable = true;
+            # };
+            # ".config/leftwm/down" = {
+            #   source = modularConfigs.downscript;
+            #   executable = true;
+            # };
           }
         # Fixed config
         else
