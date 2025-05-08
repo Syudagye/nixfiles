@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  roc,
   ...
 }:
 
@@ -33,7 +32,6 @@
         ### Common packages
         tex
         pandoc
-        roc.packages.${pkgs.system}.full
 
         # iosevka-bin
         iosevka
@@ -59,12 +57,6 @@
   };
 
   programs = {
-    zsh.envExtra = ''
-      if command -v "ssh-agent" &>/dev/null
-      then
-        eval $(ssh-agent) &>/dev/null
-      fi
-    '';
     opam = {
       enable = true;
       enableZshIntegration = true;

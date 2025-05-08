@@ -33,8 +33,13 @@ in
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
         defaultKeymap = "emacs"; # This is to avoid zsh to spit out the keybinds on startup
-        initExtra = ''
+        initContent = ''
           source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+          if command -v "ssh-agent" &>/dev/null
+          then
+            eval $(ssh-agent) &>/dev/null
+          fi
         '';
         shellAliases = {
           la = "ls -a";

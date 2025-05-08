@@ -12,7 +12,6 @@
     eww.url = "github:elkowar/eww";
     hyprland.url = "github:hyprwm/hyprland";
     funky-tags.url = "github:Syudagye/funky-tags";
-    roc.url = "github:roc-lang/roc";
   };
 
   outputs =

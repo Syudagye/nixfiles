@@ -29,32 +29,6 @@
         ;
     };
     createDir = prev.callPackage ./pkgs/utils/createDir.nix { };
-    # Tempoprary fix for neovide in nixos-unstable
-    neovide = prev.callPackage ./pkgs/tempfix-neovide {
-      inherit (prev)
-        rustPlatform
-        clangStdenv
-        fetchFromGitHub
-        linkFarm
-        fetchgit
-        runCommand
-        gn
-        neovim
-        ninja
-        makeWrapper
-        pkg-config
-        python3
-        removeReferencesTo
-        apple-sdk_11
-        SDL2
-        fontconfig
-        xorg
-        stdenv
-        libglvnd
-        libxkbcommon
-        wayland
-        ;
-    };
     kanata = prev.callPackage ./pkgs/kanata.nix {
       inherit (prev) fetchFromGitHub rustPlatform;
     };
